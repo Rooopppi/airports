@@ -1,0 +1,48 @@
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "Select", function () {
+    return Select;
+  });
+  var _react = require('react');
+  var _jsxFileName = "D:\\projects\\new\\src\\components\\Select\\Select.tsx";
+  const Select = ({label, options}) => {
+    return (
+      /*#__PURE__*/_react.createElement("label", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 10,
+          columnNumber: 5
+        }
+      }, label, /*#__PURE__*/_react.createElement("select", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 12,
+          columnNumber: 7
+        }
+      }, options.map(option => /*#__PURE__*/_react.createElement("option", {
+        key: option,
+        value: option,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 14,
+          columnNumber: 11
+        }
+      }, option))))
+    );
+  };
+  _c = Select;
+  var _c;
+  $RefreshReg$(_c, "Select");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

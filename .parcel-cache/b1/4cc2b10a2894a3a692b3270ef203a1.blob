@@ -1,0 +1,118 @@
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "Airport", function () {
+    return Airport;
+  });
+  var _react = require("react");
+  require("./Airport.scss");
+  var _Rating = require("../Rating");
+  var _jsxFileName = "D:\\projects\\new\\src\\components\\Airport\\Airport.tsx";
+  const Airport = ({imageSrc, name, country, rating}) => {
+    return (
+      /*#__PURE__*/_react.createElement("div", {
+        className: "airport",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 15,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_react.createElement("img", {
+        className: "image",
+        src: imageSrc,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16,
+          columnNumber: 7
+        }
+      }), /*#__PURE__*/_react.createElement("div", {
+        className: "overlay",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17,
+          columnNumber: 7
+        }
+      }), /*#__PURE__*/_react.createElement("div", {
+        className: "content",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_react.createElement("div", {
+        className: "basicInfo",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 19,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement("span", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20,
+          columnNumber: 11
+        }
+      }, /*#__PURE__*/_react.createElement("h2", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21,
+          columnNumber: 13
+        }
+      }, country), /*#__PURE__*/_react.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 22,
+          columnNumber: 13
+        }
+      }, name)), /*#__PURE__*/_react.createElement(_Rating.Rating, {
+        rating: rating,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 24,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("p", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 26,
+          columnNumber: 9
+        }
+      }, "Direct connections"), /*#__PURE__*/_react.createElement("button", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 27,
+          columnNumber: 9
+        }
+      }, "Start from"), /*#__PURE__*/_react.createElement("button", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 28,
+          columnNumber: 9
+        }
+      }, "Go to")))
+    );
+  };
+  _c = Airport;
+  var _c;
+  $RefreshReg$(_c, "Airport");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

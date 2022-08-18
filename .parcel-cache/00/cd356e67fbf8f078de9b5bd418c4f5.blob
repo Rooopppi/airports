@@ -1,0 +1,62 @@
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "SearchBar", function () {
+    return SearchBar;
+  });
+  var _react = require('react');
+  var _Select = require('./Select');
+  var _SearchBarScss = require('./SearchBar.scss');
+  var _SearchBarScssDefault = _parcelHelpers.interopDefault(_SearchBarScss);
+  var _jsxFileName = "D:\\projects\\new\\src\\components\\SearchBar\\SearchBar.tsx";
+  const SearchBar = () => {
+    const options = ["Senegal, Dakar-Léopold Sédar Senghor In.", "Greece, Athens-Eleftherios Venizelos Inte.", "United States, Washington-Ronald Reagan W."];
+    return (
+      /*#__PURE__*/_react.createElement("div", {
+        className: _SearchBarScssDefault.default.searchBar,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 15,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement(_Select.Select, {
+        label: "From",
+        options: options,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_react.createElement(_Select.Select, {
+        label: "To",
+        options: options,
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17,
+          columnNumber: 13
+        }
+      }), /*#__PURE__*/_react.createElement("button", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18,
+          columnNumber: 13
+        }
+      }, "Search"))
+    );
+  };
+  _c = SearchBar;
+  var _c;
+  $RefreshReg$(_c, "SearchBar");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

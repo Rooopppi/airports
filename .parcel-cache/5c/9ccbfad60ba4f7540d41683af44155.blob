@@ -1,0 +1,18 @@
+<html lang="en">
+
+<head><link rel="stylesheet" href="/index.HASH_REF_5db0050b954f29750a775d66f56e50ce.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>Flights App</title>
+</head>
+
+<body>
+  <div id="root"></div>
+  <script src="/index.HASH_REF_b5ccbe5b544ee99c46ef8e94ed731f93.js"></script>
+</body>
+
+</html>

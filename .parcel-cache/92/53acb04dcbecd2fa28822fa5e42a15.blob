@@ -1,0 +1,27 @@
+var helpers = require("../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _react = require('react');
+  var _reactDom = require('react-dom');
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  var _reactDomDefault = _parcelHelpers.interopDefault(_reactDom);
+  var _componentsApp = require('./components/app');
+  var _jsxFileName = "D:\\projects\\new\\src\\index.tsx";
+  _reactDomDefault.default.render(/*#__PURE__*/_react.createElement(_componentsApp.App, {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 7,
+      columnNumber: 3
+    }
+  }), document.getElementById('root'));
+  if (module.hot !== undefined) {
+    module.hot.accept();
+  }
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}

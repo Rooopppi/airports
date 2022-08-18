@@ -1,0 +1,76 @@
+.airport {
+  position: relative;
+  display: flex;
+  height: 390px;
+  overflow: hidden;
+}
+.airport:hover .content {
+  transform: translateY(0);
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--clr-bluish-grey);
+  opacity: 0.2;
+}
+
+.content {
+  z-index: 1;
+  width: 100%;
+  margin-top: auto;
+  padding: 24px 32px;
+  color: var(--clr-white);
+  transform: translateY(100px);
+  transition: transform 0.3s;
+}
+
+.basicInfo {
+  display: flex;
+  justify-content: space-between;
+}
+.basicInfo h2 {
+  font-size: 32px;
+  font-weight: 700;
+}
+.basicInfo p {
+  font-size: 24px;
+  font-weight: 600;
+}
+.rating {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--clr-white);
+  font-weight: 700;
+}
+.searchBar {
+  margin: 40px auto;
+  padding: 16px 24px;
+  width: min-content;
+  display: flex;
+  border: 1px solid var(--clr-light-grey);
+}
+:root {
+  --clr-white: #ffffff;
+  --clr-bluish-grey: #47434e;
+  --clr-light-grey: #E5E5E5;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", sans-serif;
+}
+/*# sourceMappingURL=index.10c5a0da.css.map */
