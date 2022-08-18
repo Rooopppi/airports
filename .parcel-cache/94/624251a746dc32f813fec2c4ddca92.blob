@@ -1,7 +1,0 @@
-.searchBar {
-  margin: 40px auto;
-  padding: 16px 24px;
-  width: min-content;
-  display: flex;
-  border: 1px solid var(--clr-light-grey);
-}
