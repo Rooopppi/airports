@@ -1,0 +1,21 @@
+.select-airport {
+  padding-right: 21px;
+  border-right: solid 2px var(--clr-light-grey);
+  margin-right: 25px;
+}
+
+select {
+  appearance: none;
+  border: none;
+  font-size: 20px;
+  outline: none;
+  background-image: url('../../assets/arrow.png');
+  background-repeat: no-repeat;
+  background-position-x: 100%;
+}
+
+option {
+  padding: 20px;
+  border-radius: 20px;
+  border: solid 1px black;
+}

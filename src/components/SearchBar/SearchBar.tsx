@@ -1,5 +1,4 @@
 import * as React from 'react'
-
 import { Select } from '../Select'
 
 import './SearchBar.scss'
@@ -15,7 +14,7 @@ export const SearchBar: React.FC = () => {
     <div className='searchBar'>
       <Select label='From' options={options} />
       <Select label='To' options={options} />
-      <button>Search</button>
+      <button className='button-search'></button>
     </div>
   )
 }

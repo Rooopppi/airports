@@ -1,6 +1,5 @@
 import * as React from 'react'
-
-import './Search.scss'
+import './Banner.scss'
 
 interface BannerProps {
   from: string
@@ -14,8 +13,9 @@ export const Banner: React.FC<BannerProps> = ({ from, to, layovers }) => {
   return (
     <div className='banner'>
       <div className='travel'>
-        <span>{from}</span>
+        <span className='destination-title'>{from}</span>
         <div className='layovers'>
+          <span className='layover-first'></span>
           <div className='separator' />
           {layovers.map((layover) => (
             <>
@@ -23,12 +23,13 @@ export const Banner: React.FC<BannerProps> = ({ from, to, layovers }) => {
               <div className='separator' />
             </>
           ))}
+          <span className='layover-last'></span>
         </div>
-        <span>{to}</span>
+        <span className='destination-title'>{to}</span>
       </div>
       <div className='summary'>
-        {changesCount} change
-        <button>Go!</button>
+        <div className='change-count'>{changesCount} changes</div>
+        <button className='button-go'>Go!</button>
       </div>
     </div>
   )

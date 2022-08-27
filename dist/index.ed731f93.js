@@ -1049,16 +1049,24 @@ helpers.prelude(module);
 try {
   var _react = require('react');
   var _reactDom = require('react-dom');
+  var _reactRouterDom = require('react-router-dom');
   var _app = require('./app');
-  var _jsxFileName = "D:\\projects\\new\\src\\index.tsx";
-  _reactDom.render(/*#__PURE__*/_react.createElement(_app.App, {
+  var _jsxFileName = "D:\\projects\\airports\\src\\index.tsx";
+  _reactDom.render(/*#__PURE__*/_react.createElement(_reactRouterDom.BrowserRouter, {
     __self: undefined,
     __source: {
       fileName: _jsxFileName,
-      lineNumber: 6,
-      columnNumber: 17
+      lineNumber: 8,
+      columnNumber: 3
     }
-  }), document.getElementById('root'));
+  }, /*#__PURE__*/_react.createElement(_app.App, {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 5
+    }
+  })), document.getElementById('root'));
   if (module.hot !== undefined) {
     module.hot.accept();
   }
@@ -1068,7 +1076,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-dom":"2sg1U","./app":"6C9MR"}],"3b2NM":[function(require,module,exports) {
+},{"react":"3b2NM","react-dom":"2sg1U","./app":"6C9MR","../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","react-router-dom":"3Nbp8"}],"3b2NM":[function(require,module,exports) {
 "use strict";
 if ("development" === 'production') {
   module.exports = require('./cjs/react.production.min.js');
@@ -3171,164 +3179,7 @@ module.exports = shouldUseNative() ? Object.assign : function (target, source) {
 	return to;
 };
 
-},{}],"4Jj4f":[function(require,module,exports) {
-"use strict";
-var Refresh = require('react-refresh/runtime');
-function debounce(func, delay) {
-  if ("development" === 'test') {
-    return function (args) {
-      func.call(null, args);
-    };
-  } else {
-    var timeout = undefined;
-    return function (args) {
-      clearTimeout(timeout);
-      timeout = setTimeout(function () {
-        timeout = undefined;
-        func.call(null, args);
-      }, delay);
-    };
-  }
-}
-var enqueueUpdate = debounce(function () {
-  Refresh.performReactRefresh();
-}, 30);
-// Everthing below is either adapted or copied from
-// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
-// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
-module.exports.prelude = function (module) {
-  window.$RefreshReg$ = function (type, id) {
-    Refresh.register(type, module.id + ' ' + id);
-  };
-  window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
-};
-module.exports.postlude = function (module) {
-  if (isReactRefreshBoundary(module.exports)) {
-    registerExportsForReactRefresh(module);
-    if (module.hot) {
-      module.hot.dispose(function (data) {
-        if (Refresh.hasUnrecoverableErrors()) {
-          window.location.reload();
-        }
-        data.prevExports = module.exports;
-      });
-      module.hot.accept(function (getParents) {
-        var prevExports = module.hot.data.prevExports;
-        var nextExports = module.exports;
-        // Since we just executed the code for it, it's possible
-        // that the new exports make it ineligible for being a boundary.
-        var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
-        // It can also become ineligible if its exports are incompatible
-        // with the previous exports.
-        // For example, if you add/remove/change exports, we'll want
-        // to re-execute the importing modules, and force those components
-        // to re-render. Similarly, if you convert a class component
-        // to a function, we want to invalidate the boundary.
-        var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
-        if (isNoLongerABoundary || didInvalidate) {
-          // We'll be conservative. The only case in which we won't do a full
-          // reload is if all parent modules are also refresh boundaries.
-          // In that case we'll add them to the current queue.
-          var parents = getParents();
-          if (parents.length === 0) {
-            // Looks like we bubbled to the root. Can't recover from that.
-            window.location.reload();
-            return;
-          }
-          return parents;
-        }
-        enqueueUpdate();
-      });
-    }
-  }
-};
-function isReactRefreshBoundary(exports) {
-  if (Refresh.isLikelyComponentType(exports)) {
-    return true;
-  }
-  if (exports == null || typeof exports !== 'object') {
-    // Exit if we can't iterate over exports.
-    return false;
-  }
-  var hasExports = false;
-  var areAllExportsComponents = true;
-  let isESM = ('__esModule' in exports);
-  for (var key in exports) {
-    hasExports = true;
-    if (key === '__esModule') {
-      continue;
-    }
-    var desc = Object.getOwnPropertyDescriptor(exports, key);
-    if (desc && desc.get && !isESM) {
-      // Don't invoke getters for CJS as they may have side effects.
-      return false;
-    }
-    var exportValue = exports[key];
-    if (!Refresh.isLikelyComponentType(exportValue)) {
-      areAllExportsComponents = false;
-    }
-  }
-  return hasExports && areAllExportsComponents;
-}
-function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
-  var prevSignature = getRefreshBoundarySignature(prevExports);
-  var nextSignature = getRefreshBoundarySignature(nextExports);
-  if (prevSignature.length !== nextSignature.length) {
-    return true;
-  }
-  for (var i = 0; i < nextSignature.length; i++) {
-    if (prevSignature[i] !== nextSignature[i]) {
-      return true;
-    }
-  }
-  return false;
-}
-// When this signature changes, it's unsafe to stop at this refresh boundary.
-function getRefreshBoundarySignature(exports) {
-  var signature = [];
-  signature.push(Refresh.getFamilyByType(exports));
-  if (exports == null || typeof exports !== 'object') {
-    // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return signature;
-  }
-  let isESM = ('__esModule' in exports);
-  for (var key in exports) {
-    if (key === '__esModule') {
-      continue;
-    }
-    var desc = Object.getOwnPropertyDescriptor(exports, key);
-    if (desc && desc.get && !isESM) {
-      // Don't invoke getters for CJS as they may have side effects.
-      continue;
-    }
-    var exportValue = exports[key];
-    signature.push(key);
-    signature.push(Refresh.getFamilyByType(exportValue));
-  }
-  return signature;
-}
-function registerExportsForReactRefresh(module) {
-  var exports = module.exports, id = module.id;
-  Refresh.register(exports, id + ' %exports%');
-  if (exports == null || typeof exports !== 'object') {
-    // Exit if we can't iterate over exports.
-    // (This is important for legacy environments.)
-    return;
-  }
-  let isESM = ('__esModule' in exports);
-  for (var key in exports) {
-    var desc = Object.getOwnPropertyDescriptor(exports, key);
-    if (desc && desc.get && !isESM) {
-      // Don't invoke getters for CJS as they may have side effects.
-      continue;
-    }
-    var exportValue = exports[key];
-    Refresh.register(exportValue, id + ' %exports% ' + key);
-  }
-}
-
-},{"react-refresh/runtime":"592mh"}],"2sg1U":[function(require,module,exports) {
+},{}],"2sg1U":[function(require,module,exports) {
 "use strict";
 function checkDCE() {
   /*global __REACT_DEVTOOLS_GLOBAL_HOOK__*/
@@ -26437,16 +26288,62 @@ try {
   });
   var _react = require('react');
   var _pagesHome = require('../pages/home');
+  var _pagesSearch = require('../pages/search');
+  var _reactRouterDom = require('react-router-dom');
   require('./App.scss');
-  var _jsxFileName = "D:\\projects\\new\\src\\app\\App.tsx";
-  const App = () => /*#__PURE__*/_react.createElement(_pagesHome.Home, {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 6,
-      columnNumber: 36
-    }
-  });
+  var _jsxFileName = "D:\\projects\\airports\\src\\app\\App.tsx";
+  const App = () => {
+    return (
+      /*#__PURE__*/_react.createElement("div", {
+        className: "App",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 10,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_react.createElement(_reactRouterDom.Routes, {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 11,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_react.createElement(_reactRouterDom.Route, {
+        path: "/",
+        element: /*#__PURE__*/_react.createElement(_pagesHome.Home, {
+          __self: undefined,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 12,
+            columnNumber: 34
+          }
+        }),
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 12,
+          columnNumber: 9
+        }
+      }), /*#__PURE__*/_react.createElement(_reactRouterDom.Route, {
+        path: "search",
+        element: /*#__PURE__*/_react.createElement(_pagesSearch.Search, {
+          __self: undefined,
+          __source: {
+            fileName: _jsxFileName,
+            lineNumber: 13,
+            columnNumber: 39
+          }
+        }),
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 13,
+          columnNumber: 9
+        }
+      })))
+    );
+  };
   _c = App;
   var _c;
   $RefreshReg$(_c, "App");
@@ -26456,7 +26353,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","../pages/home":"yaOLq","./App.scss":"4P09c","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"yaOLq":[function(require,module,exports) {
+},{"react":"3b2NM","../pages/home":"yaOLq","./App.scss":"4P09c","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","../pages/search":"2x7is","react-router-dom":"3Nbp8"}],"yaOLq":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _Home = require('./Home');
@@ -26476,64 +26373,94 @@ try {
   var _react = require('react');
   var _componentsAirportAirport = require('../../components/Airport/Airport');
   var _componentsSearchBar = require('../../components/SearchBar');
-  var _jsxFileName = "D:\\projects\\new\\src\\pages\\home\\Home.tsx";
+  require('./Home.scss');
+  var _jsxFileName = "D:\\projects\\airports\\src\\pages\\home\\Home.tsx";
   const Home = () => {
     return (
       /*#__PURE__*/_react.createElement("div", {
+        className: "container",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 8,
+          lineNumber: 9,
           columnNumber: 5
         }
       }, /*#__PURE__*/_react.createElement(_componentsSearchBar.SearchBar, {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 9,
+          lineNumber: 10,
           columnNumber: 7
         }
       }), /*#__PURE__*/_react.createElement("div", {
+        className: "airports-container",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 10,
+          lineNumber: 11,
           columnNumber: 7
+        }
+      }, /*#__PURE__*/_react.createElement("div", {
+        className: "airport-item",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 12,
+          columnNumber: 9
         }
       }, /*#__PURE__*/_react.createElement(_componentsAirportAirport.Airport, {
         country: "Senegal",
         imageSrc: "http://centra-flights-api.herokuapp.com/images/small/dkr.jpg",
         name: "Dakar-Léopold Sédar Senghor In.",
         rating: 4.3,
+        directConnections: ['BCN', 'MAD', 'ALC', 'CDG', 'CIA'],
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 11,
+          lineNumber: 13,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("div", {
+        className: "airport-item",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21,
           columnNumber: 9
         }
-      }), /*#__PURE__*/_react.createElement(_componentsAirportAirport.Airport, {
+      }, /*#__PURE__*/_react.createElement(_componentsAirportAirport.Airport, {
         country: "Greece",
         imageSrc: "http://centra-flights-api.herokuapp.com/images/small/ath.jpg",
         name: "Athens-Eleftherios Venizelos Inte.",
         rating: 4.8,
+        directConnections: ['BCN', 'MAD', 'ALC', 'CDG', 'CIA'],
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17,
+          lineNumber: 22,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("div", {
+        className: "airport-item",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 30,
           columnNumber: 9
         }
-      }), /*#__PURE__*/_react.createElement(_componentsAirportAirport.Airport, {
+      }, /*#__PURE__*/_react.createElement(_componentsAirportAirport.Airport, {
         country: "United States",
         imageSrc: "http://centra-flights-api.herokuapp.com/images/small/dca.jpg",
         name: "Washington-Ronald Reagan W.",
         rating: 4,
+        directConnections: ['BCN', 'MAD', 'ALC', 'CDG', 'CIA'],
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 23,
-          columnNumber: 9
+          lineNumber: 31,
+          columnNumber: 11
         }
-      })))
+      }))))
     );
   };
   _c = Home;
@@ -26545,7 +26472,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","../../components/Airport/Airport":"86IZ8","../../components/SearchBar":"3SUxG","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"86IZ8":[function(require,module,exports) {
+},{"react":"3b2NM","../../components/Airport/Airport":"86IZ8","../../components/SearchBar":"3SUxG","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./Home.scss":"gjtpI"}],"86IZ8":[function(require,module,exports) {
 var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
 var prevRefreshReg = window.$RefreshReg$;
 var prevRefreshSig = window.$RefreshSig$;
@@ -26559,15 +26486,15 @@ try {
   var _react = require('react');
   require('./Airport.scss');
   var _Rating = require('../Rating');
-  var _jsxFileName = "D:\\projects\\new\\src\\components\\Airport\\Airport.tsx";
-  const Airport = ({imageSrc, name, country, rating}) => {
+  var _jsxFileName = "D:\\projects\\airports\\src\\components\\Airport\\Airport.tsx";
+  const Airport = ({imageSrc, name, country, rating, directConnections}) => {
     return (
       /*#__PURE__*/_react.createElement("div", {
         className: "airport",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15,
+          lineNumber: 22,
           columnNumber: 5
         }
       }, /*#__PURE__*/_react.createElement("img", {
@@ -26576,7 +26503,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 16,
+          lineNumber: 23,
           columnNumber: 7
         }
       }), /*#__PURE__*/_react.createElement("div", {
@@ -26584,7 +26511,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17,
+          lineNumber: 24,
           columnNumber: 7
         }
       }), /*#__PURE__*/_react.createElement("div", {
@@ -26592,7 +26519,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18,
+          lineNumber: 25,
           columnNumber: 7
         }
       }, /*#__PURE__*/_react.createElement("div", {
@@ -26600,28 +26527,28 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 19,
+          lineNumber: 26,
           columnNumber: 9
         }
       }, /*#__PURE__*/_react.createElement("span", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 20,
+          lineNumber: 27,
           columnNumber: 11
         }
       }, /*#__PURE__*/_react.createElement("h2", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 21,
+          lineNumber: 28,
           columnNumber: 13
         }
       }, country), /*#__PURE__*/_react.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 22,
+          lineNumber: 29,
           columnNumber: 13
         }
       }, name)), /*#__PURE__*/_react.createElement(_Rating.Rating, {
@@ -26629,28 +26556,50 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 24,
+          lineNumber: 31,
           columnNumber: 11
         }
       })), /*#__PURE__*/_react.createElement("p", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 26,
+          lineNumber: 33,
           columnNumber: 9
         }
-      }, "Direct connections"), /*#__PURE__*/_react.createElement("button", {
+      }, "Direct connections"), /*#__PURE__*/_react.createElement("div", {
+        className: "direct-connections",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 27,
+          lineNumber: 34,
+          columnNumber: 9
+        }
+      }, directConnections.map(connection => {
+        return (
+          /*#__PURE__*/_react.createElement("div", {
+            className: "direct-connection",
+            key: connection,
+            __self: undefined,
+            __source: {
+              fileName: _jsxFileName,
+              lineNumber: 37,
+              columnNumber: 15
+            }
+          }, connection)
+        );
+      })), /*#__PURE__*/_react.createElement("button", {
+        className: "button-start-from",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 43,
           columnNumber: 9
         }
       }, "Start from"), /*#__PURE__*/_react.createElement("button", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 28,
+          lineNumber: 44,
           columnNumber: 9
         }
       }, "Go to")))
@@ -26683,25 +26632,146 @@ try {
     return Rating;
   });
   var _react = require('react');
-  var _IconsStar = require('../../Icons/Star');
   require('./Rating.scss');
-  var _jsxFileName = "D:\\projects\\new\\src\\components\\Rating\\Rating.tsx";
-  const Rating = ({rating}) => /*#__PURE__*/_react.createElement("div", {
-    className: "rating",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12,
-      columnNumber: 3
-    }
-  }, /*#__PURE__*/_react.createElement(_IconsStar.Star, {
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 13,
-      columnNumber: 5
-    }
-  }), rating);
+  var _jsxFileName = "D:\\projects\\airports\\src\\components\\Rating\\Rating.tsx", _s = $RefreshSig$();
+  const Rating = ({rating}) => {
+    _s();
+    const [coverWidth, setCoverWidth] = _react.useState(0);
+    _react.useMemo(() => {
+      setCoverWidth(100 - rating / 5 * 100);
+    }, []);
+    return (
+      /*#__PURE__*/_react.createElement("div", {
+        className: "rating",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_react.createElement("div", {
+        className: "stars",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 18,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_react.createElement("svg", {
+        width: "32",
+        height: "32",
+        viewBox: "0 0 32 32",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 19,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement("path", {
+        d: "M16.0001 23.3595L21.5334 26.7062C22.5468 27.3195 23.7868 26.4129 23.5201 25.2662L22.0534 18.9729L26.9468 14.7329C27.8401 13.9595 27.3601 12.4929 26.1868 12.3995L19.7468 11.8529L17.2268 5.90619C16.7734 4.82619 15.2268 4.82619 14.7734 5.90619L12.2534 11.8395L5.81343 12.3862C4.6401 12.4795 4.1601 13.9462 5.05343 14.7195L9.94676 18.9595L8.4801 25.2529C8.21343 26.3995 9.45343 27.3062 10.4668 26.6929L16.0001 23.3595Z",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 26,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("svg", {
+        width: "32",
+        height: "32",
+        viewBox: "0 0 32 32",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 28,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement("path", {
+        d: "M16.0001 23.3595L21.5334 26.7062C22.5468 27.3195 23.7868 26.4129 23.5201 25.2662L22.0534 18.9729L26.9468 14.7329C27.8401 13.9595 27.3601 12.4929 26.1868 12.3995L19.7468 11.8529L17.2268 5.90619C16.7734 4.82619 15.2268 4.82619 14.7734 5.90619L12.2534 11.8395L5.81343 12.3862C4.6401 12.4795 4.1601 13.9462 5.05343 14.7195L9.94676 18.9595L8.4801 25.2529C8.21343 26.3995 9.45343 27.3062 10.4668 26.6929L16.0001 23.3595Z",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 35,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("svg", {
+        width: "32",
+        height: "32",
+        viewBox: "0 0 32 32",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 37,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement("path", {
+        d: "M16.0001 23.3595L21.5334 26.7062C22.5468 27.3195 23.7868 26.4129 23.5201 25.2662L22.0534 18.9729L26.9468 14.7329C27.8401 13.9595 27.3601 12.4929 26.1868 12.3995L19.7468 11.8529L17.2268 5.90619C16.7734 4.82619 15.2268 4.82619 14.7734 5.90619L12.2534 11.8395L5.81343 12.3862C4.6401 12.4795 4.1601 13.9462 5.05343 14.7195L9.94676 18.9595L8.4801 25.2529C8.21343 26.3995 9.45343 27.3062 10.4668 26.6929L16.0001 23.3595Z",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 44,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("svg", {
+        width: "32",
+        height: "32",
+        viewBox: "0 0 32 32",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 46,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement("path", {
+        d: "M16.0001 23.3595L21.5334 26.7062C22.5468 27.3195 23.7868 26.4129 23.5201 25.2662L22.0534 18.9729L26.9468 14.7329C27.8401 13.9595 27.3601 12.4929 26.1868 12.3995L19.7468 11.8529L17.2268 5.90619C16.7734 4.82619 15.2268 4.82619 14.7734 5.90619L12.2534 11.8395L5.81343 12.3862C4.6401 12.4795 4.1601 13.9462 5.05343 14.7195L9.94676 18.9595L8.4801 25.2529C8.21343 26.3995 9.45343 27.3062 10.4668 26.6929L16.0001 23.3595Z",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 53,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("svg", {
+        width: "32",
+        height: "32",
+        viewBox: "0 0 32 32",
+        fill: "none",
+        xmlns: "http://www.w3.org/2000/svg",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 55,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement("path", {
+        d: "M16.0001 23.3595L21.5334 26.7062C22.5468 27.3195 23.7868 26.4129 23.5201 25.2662L22.0534 18.9729L26.9468 14.7329C27.8401 13.9595 27.3601 12.4929 26.1868 12.3995L19.7468 11.8529L17.2268 5.90619C16.7734 4.82619 15.2268 4.82619 14.7734 5.90619L12.2534 11.8395L5.81343 12.3862C4.6401 12.4795 4.1601 13.9462 5.05343 14.7195L9.94676 18.9595L8.4801 25.2529C8.21343 26.3995 9.45343 27.3062 10.4668 26.6929L16.0001 23.3595Z",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 62,
+          columnNumber: 11
+        }
+      })), /*#__PURE__*/_react.createElement("div", {
+        className: "cover",
+        style: {
+          width: `${coverWidth}%`
+        },
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 65,
+          columnNumber: 9
+        }
+      })))
+    );
+  };
+  _s(Rating, "4hQpSCV9kaq5TWoUGVn+9Hypfs0=");
   _c = Rating;
   var _c;
   $RefreshReg$(_c, "Rating");
@@ -26711,51 +26781,7 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","../../Icons/Star":"17Phg","./Rating.scss":"3DVAr","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"17Phg":[function(require,module,exports) {
-var helpers = require("../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
-var prevRefreshReg = window.$RefreshReg$;
-var prevRefreshSig = window.$RefreshSig$;
-helpers.prelude(module);
-try {
-  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
-  _parcelHelpers.defineInteropFlag(exports);
-  _parcelHelpers.export(exports, "Star", function () {
-    return Star;
-  });
-  var _react = require('react');
-  var _jsxFileName = "D:\\projects\\new\\src\\Icons\\Star.tsx";
-  const Star = () => /*#__PURE__*/_react.createElement("svg", {
-    width: "32",
-    height: "32",
-    viewBox: "0 0 32 32",
-    fill: "none",
-    xmlns: "http://www.w3.org/2000/svg",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 4,
-      columnNumber: 3
-    }
-  }, /*#__PURE__*/_react.createElement("path", {
-    d: "M16.0001 23.3595L21.5334 26.7062C22.5468 27.3195 23.7868 26.4129 23.5201 25.2662L22.0534 18.9729L26.9468 14.7329C27.8401 13.9595 27.3601 12.4929 26.1868 12.3995L19.7468 11.8529L17.2268 5.90619C16.7734 4.82619 15.2268 4.82619 14.7734 5.90619L12.2534 11.8395L5.81343 12.3862C4.6401 12.4795 4.1601 13.9462 5.05343 14.7195L9.94676 18.9595L8.4801 25.2529C8.21343 26.3995 9.45343 27.3062 10.4668 26.6929L16.0001 23.3595Z",
-    fill: "#F2C94C",
-    __self: undefined,
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 5,
-      columnNumber: 5
-    }
-  }));
-  _c = Star;
-  var _c;
-  $RefreshReg$(_c, "Star");
-  helpers.postlude(module);
-} finally {
-  window.$RefreshReg$ = prevRefreshReg;
-  window.$RefreshSig$ = prevRefreshSig;
-}
-
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5gA8y":[function(require,module,exports) {
+},{"react":"3b2NM","./Rating.scss":"3DVAr","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"3DVAr":[function() {},{}],"5gA8y":[function(require,module,exports) {
 "use strict";
 
 exports.interopDefault = function (a) {
@@ -26797,7 +26823,164 @@ exports.export = function (dest, destName, get) {
     get: get
   });
 };
-},{}],"3DVAr":[function() {},{}],"3SUxG":[function(require,module,exports) {
+},{}],"4Jj4f":[function(require,module,exports) {
+"use strict";
+var Refresh = require('react-refresh/runtime');
+function debounce(func, delay) {
+  if ("development" === 'test') {
+    return function (args) {
+      func.call(null, args);
+    };
+  } else {
+    var timeout = undefined;
+    return function (args) {
+      clearTimeout(timeout);
+      timeout = setTimeout(function () {
+        timeout = undefined;
+        func.call(null, args);
+      }, delay);
+    };
+  }
+}
+var enqueueUpdate = debounce(function () {
+  Refresh.performReactRefresh();
+}, 30);
+// Everthing below is either adapted or copied from
+// https://github.com/facebook/metro/blob/61de16bd1edd7e738dd0311c89555a644023ab2d/packages/metro/src/lib/polyfills/require.js
+// MIT License - Copyright (c) Facebook, Inc. and its affiliates.
+module.exports.prelude = function (module) {
+  window.$RefreshReg$ = function (type, id) {
+    Refresh.register(type, module.id + ' ' + id);
+  };
+  window.$RefreshSig$ = Refresh.createSignatureFunctionForTransform;
+};
+module.exports.postlude = function (module) {
+  if (isReactRefreshBoundary(module.exports)) {
+    registerExportsForReactRefresh(module);
+    if (module.hot) {
+      module.hot.dispose(function (data) {
+        if (Refresh.hasUnrecoverableErrors()) {
+          window.location.reload();
+        }
+        data.prevExports = module.exports;
+      });
+      module.hot.accept(function (getParents) {
+        var prevExports = module.hot.data.prevExports;
+        var nextExports = module.exports;
+        // Since we just executed the code for it, it's possible
+        // that the new exports make it ineligible for being a boundary.
+        var isNoLongerABoundary = !isReactRefreshBoundary(nextExports);
+        // It can also become ineligible if its exports are incompatible
+        // with the previous exports.
+        // For example, if you add/remove/change exports, we'll want
+        // to re-execute the importing modules, and force those components
+        // to re-render. Similarly, if you convert a class component
+        // to a function, we want to invalidate the boundary.
+        var didInvalidate = shouldInvalidateReactRefreshBoundary(prevExports, nextExports);
+        if (isNoLongerABoundary || didInvalidate) {
+          // We'll be conservative. The only case in which we won't do a full
+          // reload is if all parent modules are also refresh boundaries.
+          // In that case we'll add them to the current queue.
+          var parents = getParents();
+          if (parents.length === 0) {
+            // Looks like we bubbled to the root. Can't recover from that.
+            window.location.reload();
+            return;
+          }
+          return parents;
+        }
+        enqueueUpdate();
+      });
+    }
+  }
+};
+function isReactRefreshBoundary(exports) {
+  if (Refresh.isLikelyComponentType(exports)) {
+    return true;
+  }
+  if (exports == null || typeof exports !== 'object') {
+    // Exit if we can't iterate over exports.
+    return false;
+  }
+  var hasExports = false;
+  var areAllExportsComponents = true;
+  let isESM = ('__esModule' in exports);
+  for (var key in exports) {
+    hasExports = true;
+    if (key === '__esModule') {
+      continue;
+    }
+    var desc = Object.getOwnPropertyDescriptor(exports, key);
+    if (desc && desc.get && !isESM) {
+      // Don't invoke getters for CJS as they may have side effects.
+      return false;
+    }
+    var exportValue = exports[key];
+    if (!Refresh.isLikelyComponentType(exportValue)) {
+      areAllExportsComponents = false;
+    }
+  }
+  return hasExports && areAllExportsComponents;
+}
+function shouldInvalidateReactRefreshBoundary(prevExports, nextExports) {
+  var prevSignature = getRefreshBoundarySignature(prevExports);
+  var nextSignature = getRefreshBoundarySignature(nextExports);
+  if (prevSignature.length !== nextSignature.length) {
+    return true;
+  }
+  for (var i = 0; i < nextSignature.length; i++) {
+    if (prevSignature[i] !== nextSignature[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+// When this signature changes, it's unsafe to stop at this refresh boundary.
+function getRefreshBoundarySignature(exports) {
+  var signature = [];
+  signature.push(Refresh.getFamilyByType(exports));
+  if (exports == null || typeof exports !== 'object') {
+    // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return signature;
+  }
+  let isESM = ('__esModule' in exports);
+  for (var key in exports) {
+    if (key === '__esModule') {
+      continue;
+    }
+    var desc = Object.getOwnPropertyDescriptor(exports, key);
+    if (desc && desc.get && !isESM) {
+      // Don't invoke getters for CJS as they may have side effects.
+      continue;
+    }
+    var exportValue = exports[key];
+    signature.push(key);
+    signature.push(Refresh.getFamilyByType(exportValue));
+  }
+  return signature;
+}
+function registerExportsForReactRefresh(module) {
+  var exports = module.exports, id = module.id;
+  Refresh.register(exports, id + ' %exports%');
+  if (exports == null || typeof exports !== 'object') {
+    // Exit if we can't iterate over exports.
+    // (This is important for legacy environments.)
+    return;
+  }
+  let isESM = ('__esModule' in exports);
+  for (var key in exports) {
+    var desc = Object.getOwnPropertyDescriptor(exports, key);
+    if (desc && desc.get && !isESM) {
+      // Don't invoke getters for CJS as they may have side effects.
+      continue;
+    }
+    var exportValue = exports[key];
+    Refresh.register(exportValue, id + ' %exports% ' + key);
+  }
+}
+
+},{"react-refresh/runtime":"592mh"}],"3SUxG":[function(require,module,exports) {
 var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
 _parcelHelpers.defineInteropFlag(exports);
 var _SearchBar = require('./SearchBar');
@@ -26817,7 +27000,7 @@ try {
   var _react = require('react');
   var _Select = require('../Select');
   require('./SearchBar.scss');
-  var _jsxFileName = "D:\\projects\\new\\src\\components\\SearchBar\\SearchBar.tsx";
+  var _jsxFileName = "D:\\projects\\airports\\src\\components\\SearchBar\\SearchBar.tsx";
   const SearchBar = () => {
     const options = ['Senegal, Dakar-Léopold Sédar Senghor In.', 'Greece, Athens-Eleftherios Venizelos Inte.', 'United States, Washington-Ronald Reagan W.'];
     return (
@@ -26826,7 +27009,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 15,
+          lineNumber: 14,
           columnNumber: 5
         }
       }, /*#__PURE__*/_react.createElement(_Select.Select, {
@@ -26835,7 +27018,7 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 16,
+          lineNumber: 15,
           columnNumber: 7
         }
       }), /*#__PURE__*/_react.createElement(_Select.Select, {
@@ -26844,17 +27027,18 @@ try {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 17,
+          lineNumber: 16,
           columnNumber: 7
         }
       }), /*#__PURE__*/_react.createElement("button", {
+        className: "button-search",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 18,
+          lineNumber: 17,
           columnNumber: 7
         }
-      }, "Search"))
+      }))
     );
   };
   _c = SearchBar;
@@ -26884,33 +27068,43 @@ try {
     return Select;
   });
   var _react = require('react');
-  var _jsxFileName = "D:\\projects\\new\\src\\components\\Select\\Select.tsx";
+  require('./Select.scss');
+  var _jsxFileName = "D:\\projects\\airports\\src\\components\\Select\\Select.tsx";
   const Select = ({label, options}) => {
     return (
-      /*#__PURE__*/_react.createElement("label", {
+      /*#__PURE__*/_react.createElement("div", {
+        className: "select-airport",
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 10,
+          lineNumber: 11,
           columnNumber: 5
         }
-      }, label, /*#__PURE__*/_react.createElement("select", {
+      }, /*#__PURE__*/_react.createElement("label", {
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
           lineNumber: 12,
           columnNumber: 7
         }
+      }, label, /*#__PURE__*/_react.createElement("select", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 14,
+          columnNumber: 9
+        }
       }, options.map(option => /*#__PURE__*/_react.createElement("option", {
+        className: "airport-option",
         key: option,
         value: option,
         __self: undefined,
         __source: {
           fileName: _jsxFileName,
-          lineNumber: 14,
-          columnNumber: 11
+          lineNumber: 16,
+          columnNumber: 13
         }
-      }, option))))
+      }, option)))))
     );
   };
   _c = Select;
@@ -26922,6 +27116,2315 @@ try {
   window.$RefreshSig$ = prevRefreshSig;
 }
 
-},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"1J3IJ":[function() {},{}],"4P09c":[function() {},{}]},["1j6wU","3MZLv","5mCR7"], "5mCR7", "parcelRequireae5e")
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f","./Select.scss":"6NdJF"}],"6NdJF":[function() {},{}],"1J3IJ":[function() {},{}],"gjtpI":[function() {},{}],"4P09c":[function() {},{}],"2x7is":[function(require,module,exports) {
+var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+_parcelHelpers.defineInteropFlag(exports);
+var _Search = require('./Search');
+_parcelHelpers.exportAll(_Search, exports);
+
+},{"./Search":"19QSr","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y"}],"19QSr":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "Search", function () {
+    return Search;
+  });
+  var _react = require('react');
+  var _componentsBannerBanner = require('../../components/Banner/Banner');
+  var _componentsFlightImageFlightImage = require('../../components/FlightImage/FlightImage');
+  require('./Search.scss');
+  var _jsxFileName = "D:\\projects\\airports\\src\\pages\\search\\Search.tsx";
+  const Search = () => /*#__PURE__*/_react.createElement("div", {
+    className: "search-page",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 9,
+      columnNumber: 3
+    }
+  }, /*#__PURE__*/_react.createElement("div", {
+    className: "background",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 10,
+      columnNumber: 5
+    }
+  }, /*#__PURE__*/_react.createElement("img", {
+    src: "http://centra-flights-api.herokuapp.com/images/full/dkr.jpg",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 11,
+      columnNumber: 7
+    }
+  }), /*#__PURE__*/_react.createElement("img", {
+    src: "http://centra-flights-api.herokuapp.com/images/full/ath.jpg",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12,
+      columnNumber: 7
+    }
+  })), /*#__PURE__*/_react.createElement("div", {
+    className: "content",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 14,
+      columnNumber: 5
+    }
+  }, /*#__PURE__*/_react.createElement(_componentsFlightImageFlightImage.FlightImage, {
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16,
+      columnNumber: 7
+    }
+  }), /*#__PURE__*/_react.createElement(_componentsBannerBanner.Banner, {
+    from: "WAW",
+    to: "DXB",
+    layovers: ['AMS', 'CDG'],
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 17,
+      columnNumber: 7
+    }
+  })));
+  _c = Search;
+  var _c;
+  $RefreshReg$(_c, "Search");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","../../components/Banner/Banner":"58v0R","../../components/FlightImage/FlightImage":"nVif1","./Search.scss":"5sUjm","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"58v0R":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "Banner", function () {
+    return Banner;
+  });
+  var _react = require('react');
+  var _jsxFileName = "D:\\projects\\airports\\src\\components\\Banner\\Banner.tsx";
+  const Banner = ({from, to, layovers}) => {
+    const changesCount = layovers.length;
+    return (
+      /*#__PURE__*/_react.createElement("div", {
+        className: "banner",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 13,
+          columnNumber: 5
+        }
+      }, /*#__PURE__*/_react.createElement("div", {
+        className: "travel",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 14,
+          columnNumber: 7
+        }
+      }, /*#__PURE__*/_react.createElement("span", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 15,
+          columnNumber: 9
+        }
+      }, from), /*#__PURE__*/_react.createElement("div", {
+        className: "layovers",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 16,
+          columnNumber: 9
+        }
+      }, /*#__PURE__*/_react.createElement("div", {
+        className: "separator",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 17,
+          columnNumber: 11
+        }
+      }), layovers.map(layover => /*#__PURE__*/_react.createElement(_react.Fragment, null, /*#__PURE__*/_react.createElement("span", {
+        className: "layover",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 20,
+          columnNumber: 15
+        }
+      }, layover), /*#__PURE__*/_react.createElement("div", {
+        className: "separator",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 21,
+          columnNumber: 15
+        }
+      })))), /*#__PURE__*/_react.createElement("span", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 25,
+          columnNumber: 9
+        }
+      }, to)), /*#__PURE__*/_react.createElement("div", {
+        className: "summary",
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 27,
+          columnNumber: 7
+        }
+      }, changesCount, " change", /*#__PURE__*/_react.createElement("button", {
+        __self: undefined,
+        __source: {
+          fileName: _jsxFileName,
+          lineNumber: 29,
+          columnNumber: 9
+        }
+      }, "Go!")))
+    );
+  };
+  _c = Banner;
+  var _c;
+  $RefreshReg$(_c, "Banner");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"nVif1":[function(require,module,exports) {
+var helpers = require("../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js");
+var prevRefreshReg = window.$RefreshReg$;
+var prevRefreshSig = window.$RefreshSig$;
+helpers.prelude(module);
+try {
+  var _parcelHelpers = require("@parcel/transformer-js/lib/esmodule-helpers.js");
+  _parcelHelpers.defineInteropFlag(exports);
+  _parcelHelpers.export(exports, "FlightImage", function () {
+    return FlightImage;
+  });
+  var _react = require('react');
+  var _jsxFileName = "D:\\projects\\airports\\src\\components\\FlightImage\\FlightImage.tsx";
+  const FlightImage = () => /*#__PURE__*/_react.createElement("svg", {
+    width: "462",
+    height: "78",
+    viewBox: "0 0 462 78",
+    fill: "none",
+    xmlns: "http://www.w3.org/2000/svg",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 4,
+      columnNumber: 3
+    }
+  }, /*#__PURE__*/_react.createElement("path", {
+    d: "M20 63.0006C20 63.0006 117.5 16.3784 223.5 11.9145C329.5 7.4506 442 63.0006 442 63.0006",
+    stroke: "white",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 5,
+      columnNumber: 5
+    }
+  }), /*#__PURE__*/_react.createElement("path", {
+    d: "M303.887 31.1289C304.358 31.2249 304.842 31.0651 305.186 30.7272L313.395 22.1837L320.58 23.6507C321.664 23.872 322.725 23.1769 322.955 22.0945C323.185 21.012 322.496 19.9595 321.412 19.7381L314.226 18.2711L310.181 7.2256C310.016 6.78366 309.625 6.44518 309.155 6.34915C308.24 6.16244 307.385 6.91327 307.471 7.85613L308.348 17.0708L301.163 15.6038L299.898 12.8962C299.816 12.7026 299.64 12.5713 299.431 12.5286L298.66 12.3713C298.229 12.2832 297.827 12.6366 297.856 13.0779L298.134 17.0266L296.27 20.5379C296.064 20.9313 296.289 21.4126 296.72 21.5006L297.49 21.658C297.699 21.7007 297.915 21.6494 298.068 21.5039L300.331 19.5164L307.516 20.9834L302.958 29.0885C302.495 29.9193 302.973 30.9422 303.887 31.1289Z",
+    fill: "white",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 12,
+      columnNumber: 5
+    }
+  }), /*#__PURE__*/_react.createElement("path", {
+    d: "M11 72.0011C11 74.7612 8.76171 76.9993 6 76.9993C3.23829 76.9993 1 74.7612 1 72.0011C1 69.241 3.23829 67.0029 6 67.0029C8.76171 67.0029 11 69.241 11 72.0011Z",
+    stroke: "white",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 16,
+      columnNumber: 5
+    }
+  }), /*#__PURE__*/_react.createElement("path", {
+    d: "M461 72.0011C461 74.7612 458.762 76.9993 456 76.9993C453.238 76.9993 451 74.7612 451 72.0011C451 69.241 453.238 67.0029 456 67.0029C458.762 67.0029 461 69.241 461 72.0011Z",
+    stroke: "white",
+    __self: undefined,
+    __source: {
+      fileName: _jsxFileName,
+      lineNumber: 21,
+      columnNumber: 5
+    }
+  }));
+  _c = FlightImage;
+  var _c;
+  $RefreshReg$(_c, "FlightImage");
+  helpers.postlude(module);
+} finally {
+  window.$RefreshReg$ = prevRefreshReg;
+  window.$RefreshSig$ = prevRefreshSig;
+}
+
+},{"react":"3b2NM","@parcel/transformer-js/lib/esmodule-helpers.js":"5gA8y","../../../node_modules/@parcel/transformer-react-refresh-wrap/lib/helpers/helpers.js":"4Jj4f"}],"5sUjm":[function() {},{}],"3Nbp8":[function(require,module,exports) {
+/**
+* React Router DOM v6.3.0
+*
+* Copyright (c) Remix Software Inc.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE.md file in the root directory of this source tree.
+*
+* @license MIT
+*/
+"use strict";
+/*eslint-env node*/
+if ("development" === "production") {
+  module.exports = require("./umd/react-router-dom.production.min.js");
+} else {
+  module.exports = require("./umd/react-router-dom.development.js");
+}
+
+},{"./umd/react-router-dom.development.js":"12asx"}],"12asx":[function(require,module,exports) {
+var define;
+/**
+* React Router DOM v6.3.0
+*
+* Copyright (c) Remix Software Inc.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE.md file in the root directory of this source tree.
+*
+* @license MIT
+*/
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('react'), require('history'), require('react-router')) : typeof define === 'function' && define.amd ? define(['exports', 'react', 'history', 'react-router'], factory) : (global = global || self, factory(global.ReactRouterDOM = {}, global.React, global.HistoryLibrary, global.ReactRouter));
+})(this, function (exports, React, history, reactRouter) {
+  "use strict";
+  function _extends() {
+    _extends = Object.assign || (function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    });
+    return _extends.apply(this, arguments);
+  }
+  function _objectWithoutPropertiesLoose(source, excluded) {
+    if (source == null) return {};
+    var target = {};
+    var sourceKeys = Object.keys(source);
+    var key, i;
+    for (i = 0; i < sourceKeys.length; i++) {
+      key = sourceKeys[i];
+      if (excluded.indexOf(key) >= 0) continue;
+      target[key] = source[key];
+    }
+    return target;
+  }
+  const _excluded = ["onClick", "reloadDocument", "replace", "state", "target", "to"], _excluded2 = ["aria-current", "caseSensitive", "className", "end", "style", "to", "children"];
+  function warning(cond, message) {
+    if (!cond) {
+      // eslint-disable-next-line no-console
+      if (typeof console !== "undefined") console.warn(message);
+      try {
+        // Welcome to debugging React Router!
+        // 
+        // This error is thrown as a convenience so you can more easily
+        // find the source for a warning that appears in the console by
+        // enabling "pause on exceptions" in your JavaScript debugger.
+        throw new Error(message);
+      } catch (e) {}
+    }
+  }
+  // //////////////////////////////////////////////////////////////////////////////
+  // COMPONENTS
+  // //////////////////////////////////////////////////////////////////////////////
+  /**
+  * A `<Router>` for use in web browsers. Provides the cleanest URLs.
+  */
+  function BrowserRouter(_ref) {
+    let {basename, children, window} = _ref;
+    let historyRef = React.useRef();
+    if (historyRef.current == null) {
+      historyRef.current = history.createBrowserHistory({
+        window
+      });
+    }
+    let history$1 = historyRef.current;
+    let [state, setState] = React.useState({
+      action: history$1.action,
+      location: history$1.location
+    });
+    React.useLayoutEffect(() => history$1.listen(setState), [history$1]);
+    return (
+      /*#__PURE__*/React.createElement(reactRouter.Router, {
+        basename: basename,
+        children: children,
+        location: state.location,
+        navigationType: state.action,
+        navigator: history$1
+      })
+    );
+  }
+  /**
+  * A `<Router>` for use in web browsers. Stores the location in the hash
+  * portion of the URL so it is not sent to the server.
+  */
+  function HashRouter(_ref2) {
+    let {basename, children, window} = _ref2;
+    let historyRef = React.useRef();
+    if (historyRef.current == null) {
+      historyRef.current = history.createHashHistory({
+        window
+      });
+    }
+    let history$1 = historyRef.current;
+    let [state, setState] = React.useState({
+      action: history$1.action,
+      location: history$1.location
+    });
+    React.useLayoutEffect(() => history$1.listen(setState), [history$1]);
+    return (
+      /*#__PURE__*/React.createElement(reactRouter.Router, {
+        basename: basename,
+        children: children,
+        location: state.location,
+        navigationType: state.action,
+        navigator: history$1
+      })
+    );
+  }
+  /**
+  * A `<Router>` that accepts a pre-instantiated history object. It's important
+  * to note that using your own history object is highly discouraged and may add
+  * two versions of the history library to your bundles unless you use the same
+  * version of the history library that React Router uses internally.
+  */
+  function HistoryRouter(_ref3) {
+    let {basename, children, history} = _ref3;
+    const [state, setState] = React.useState({
+      action: history.action,
+      location: history.location
+    });
+    React.useLayoutEffect(() => history.listen(setState), [history]);
+    return (
+      /*#__PURE__*/React.createElement(reactRouter.Router, {
+        basename: basename,
+        children: children,
+        location: state.location,
+        navigationType: state.action,
+        navigator: history
+      })
+    );
+  }
+  {
+    HistoryRouter.displayName = "unstable_HistoryRouter";
+  }
+  function isModifiedEvent(event) {
+    return !!(event.metaKey || event.altKey || event.ctrlKey || event.shiftKey);
+  }
+  /**
+  * The public API for rendering a history-aware <a>.
+  */
+  const Link = /*#__PURE__*/React.forwardRef(function LinkWithRef(_ref4, ref) {
+    let {onClick, reloadDocument, replace = false, state, target, to} = _ref4, rest = _objectWithoutPropertiesLoose(_ref4, _excluded);
+    let href = reactRouter.useHref(to);
+    let internalOnClick = useLinkClickHandler(to, {
+      replace,
+      state,
+      target
+    });
+    function handleClick(event) {
+      if (onClick) onClick(event);
+      if (!event.defaultPrevented && !reloadDocument) {
+        internalOnClick(event);
+      }
+    }
+    return (
+      /*#__PURE__*/
+      // eslint-disable-next-line jsx-a11y/anchor-has-content
+      React.createElement("a", _extends({}, rest, {
+        href: href,
+        onClick: handleClick,
+        ref: ref,
+        target: target
+      }))
+    );
+  });
+  {
+    Link.displayName = "Link";
+      /**
+    * A <Link> wrapper that knows if it's "active" or not.
+    */
+}
+  /**
+  * A <Link> wrapper that knows if it's "active" or not.
+  */
+  const NavLink = /*#__PURE__*/React.forwardRef(function NavLinkWithRef(_ref5, ref) {
+    let {"aria-current": ariaCurrentProp = "page", caseSensitive = false, className: classNameProp = "", end = false, style: styleProp, to, children} = _ref5, rest = _objectWithoutPropertiesLoose(_ref5, _excluded2);
+    let location = reactRouter.useLocation();
+    let path = reactRouter.useResolvedPath(to);
+    let locationPathname = location.pathname;
+    let toPathname = path.pathname;
+    if (!caseSensitive) {
+      locationPathname = locationPathname.toLowerCase();
+      toPathname = toPathname.toLowerCase();
+    }
+    let isActive = locationPathname === toPathname || !end && locationPathname.startsWith(toPathname) && locationPathname.charAt(toPathname.length) === "/";
+    let ariaCurrent = isActive ? ariaCurrentProp : undefined;
+    let className;
+    if (typeof classNameProp === "function") {
+      className = classNameProp({
+        isActive
+      });
+    } else {
+      // If the className prop is not a function, we use a default `active`
+      // class for <NavLink />s that are active. In v5 `active` was the default
+      // value for `activeClassName`, but we are removing that API and can still
+      // use the old default behavior for a cleaner upgrade path and keep the
+      // simple styling rules working as they currently do.
+      className = [classNameProp, isActive ? "active" : null].filter(Boolean).join(" ");
+    }
+    let style = typeof styleProp === "function" ? styleProp({
+      isActive
+    }) : styleProp;
+    return (
+      /*#__PURE__*/React.createElement(Link, _extends({}, rest, {
+        "aria-current": ariaCurrent,
+        className: className,
+        ref: ref,
+        style: style,
+        to: to
+      }), typeof children === "function" ? children({
+        isActive
+      }) : children)
+    );
+  });
+  {
+    NavLink.displayName = "NavLink";
+      // //////////////////////////////////////////////////////////////////////////////
+    // HOOKS
+    // //////////////////////////////////////////////////////////////////////////////
+    /**
+    * Handles the click behavior for router `<Link>` components. This is useful if
+    * you need to create custom `<Link>` components with the same click behavior we
+    * use in our exported `<Link>`.
+    */
+}
+  // //////////////////////////////////////////////////////////////////////////////
+  // HOOKS
+  // //////////////////////////////////////////////////////////////////////////////
+  /**
+  * Handles the click behavior for router `<Link>` components. This is useful if
+  * you need to create custom `<Link>` components with the same click behavior we
+  * use in our exported `<Link>`.
+  */
+  function useLinkClickHandler(to, _temp) {
+    let {target, replace: replaceProp, state} = _temp === void 0 ? {} : _temp;
+    let navigate = reactRouter.useNavigate();
+    let location = reactRouter.useLocation();
+    let path = reactRouter.useResolvedPath(to);
+    return React.useCallback(event => {
+      if (event.button === 0 && (// Ignore everything but left clicks
+      !target || target === "_self") && // Let browser handle "target=_blank" etc.
+      !isModifiedEvent(event)) // Ignore clicks with modifier keys
+      {
+        event.preventDefault();
+        // If the URL hasn't changed, a regular <a> will do a replace instead of
+        // a push, so do the same here.
+        let replace = !!replaceProp || reactRouter.createPath(location) === reactRouter.createPath(path);
+        navigate(to, {
+          replace,
+          state
+        });
+      }
+    }, [location, navigate, path, replaceProp, state, target, to]);
+  }
+  /**
+  * A convenient wrapper for reading and writing search parameters via the
+  * URLSearchParams interface.
+  */
+  function useSearchParams(defaultInit) {
+    warning(typeof URLSearchParams !== "undefined", "You cannot use the `useSearchParams` hook in a browser that does not " + "support the URLSearchParams API. If you need to support Internet " + "Explorer 11, we recommend you load a polyfill such as " + "https://github.com/ungap/url-search-params\n\n" + "If you're unsure how to load polyfills, we recommend you check out " + "https://polyfill.io/v3/ which provides some recommendations about how " + "to load polyfills only for users that need them, instead of for every " + "user.");
+    let defaultSearchParamsRef = React.useRef(createSearchParams(defaultInit));
+    let location = reactRouter.useLocation();
+    let searchParams = React.useMemo(() => {
+      let searchParams = createSearchParams(location.search);
+      for (let key of defaultSearchParamsRef.current.keys()) {
+        if (!searchParams.has(key)) {
+          defaultSearchParamsRef.current.getAll(key).forEach(value => {
+            searchParams.append(key, value);
+          });
+        }
+      }
+      return searchParams;
+    }, [location.search]);
+    let navigate = reactRouter.useNavigate();
+    let setSearchParams = React.useCallback((nextInit, navigateOptions) => {
+      navigate("?" + createSearchParams(nextInit), navigateOptions);
+    }, [navigate]);
+    return [searchParams, setSearchParams];
+  }
+  /**
+  * Creates a URLSearchParams object using the given initializer.
+  *
+  * This is identical to `new URLSearchParams(init)` except it also
+  * supports arrays as values in the object form of the initializer
+  * instead of just strings. This is convenient when you need multiple
+  * values for a given key, but don't want to use an array initializer.
+  *
+  * For example, instead of:
+  *
+  *   let searchParams = new URLSearchParams([
+  *     ['sort', 'name'],
+  *     ['sort', 'price']
+  *   ]);
+  *
+  * you can do:
+  *
+  *   let searchParams = createSearchParams({
+  *     sort: ['name', 'price']
+  *   });
+  */
+  function createSearchParams(init) {
+    if (init === void 0) {
+      init = "";
+    }
+    return new URLSearchParams(typeof init === "string" || Array.isArray(init) || init instanceof URLSearchParams ? init : Object.keys(init).reduce((memo, key) => {
+      let value = init[key];
+      return memo.concat(Array.isArray(value) ? value.map(v => [key, v]) : [[key, value]]);
+    }, []));
+  }
+  Object.defineProperty(exports, 'MemoryRouter', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.MemoryRouter;
+    }
+  });
+  Object.defineProperty(exports, 'Navigate', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Navigate;
+    }
+  });
+  Object.defineProperty(exports, 'NavigationType', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.NavigationType;
+    }
+  });
+  Object.defineProperty(exports, 'Outlet', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Outlet;
+    }
+  });
+  Object.defineProperty(exports, 'Route', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Route;
+    }
+  });
+  Object.defineProperty(exports, 'Router', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Router;
+    }
+  });
+  Object.defineProperty(exports, 'Routes', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.Routes;
+    }
+  });
+  Object.defineProperty(exports, 'UNSAFE_LocationContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.UNSAFE_LocationContext;
+    }
+  });
+  Object.defineProperty(exports, 'UNSAFE_NavigationContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.UNSAFE_NavigationContext;
+    }
+  });
+  Object.defineProperty(exports, 'UNSAFE_RouteContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.UNSAFE_RouteContext;
+    }
+  });
+  Object.defineProperty(exports, 'createPath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.createPath;
+    }
+  });
+  Object.defineProperty(exports, 'createRoutesFromChildren', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.createRoutesFromChildren;
+    }
+  });
+  Object.defineProperty(exports, 'generatePath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.generatePath;
+    }
+  });
+  Object.defineProperty(exports, 'matchPath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.matchPath;
+    }
+  });
+  Object.defineProperty(exports, 'matchRoutes', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.matchRoutes;
+    }
+  });
+  Object.defineProperty(exports, 'parsePath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.parsePath;
+    }
+  });
+  Object.defineProperty(exports, 'renderMatches', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.renderMatches;
+    }
+  });
+  Object.defineProperty(exports, 'resolvePath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.resolvePath;
+    }
+  });
+  Object.defineProperty(exports, 'useHref', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useHref;
+    }
+  });
+  Object.defineProperty(exports, 'useInRouterContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useInRouterContext;
+    }
+  });
+  Object.defineProperty(exports, 'useLocation', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useLocation;
+    }
+  });
+  Object.defineProperty(exports, 'useMatch', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useMatch;
+    }
+  });
+  Object.defineProperty(exports, 'useNavigate', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useNavigate;
+    }
+  });
+  Object.defineProperty(exports, 'useNavigationType', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useNavigationType;
+    }
+  });
+  Object.defineProperty(exports, 'useOutlet', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useOutlet;
+    }
+  });
+  Object.defineProperty(exports, 'useOutletContext', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useOutletContext;
+    }
+  });
+  Object.defineProperty(exports, 'useParams', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useParams;
+    }
+  });
+  Object.defineProperty(exports, 'useResolvedPath', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useResolvedPath;
+    }
+  });
+  Object.defineProperty(exports, 'useRoutes', {
+    enumerable: true,
+    get: function () {
+      return reactRouter.useRoutes;
+    }
+  });
+  exports.BrowserRouter = BrowserRouter;
+  exports.HashRouter = HashRouter;
+  exports.Link = Link;
+  exports.NavLink = NavLink;
+  exports.createSearchParams = createSearchParams;
+  exports.unstable_HistoryRouter = HistoryRouter;
+  exports.useLinkClickHandler = useLinkClickHandler;
+  exports.useSearchParams = useSearchParams;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"react":"3b2NM","history":"3dARO","react-router":"2A6lS"}],"3dARO":[function(require,module,exports) {
+"use strict";
+/*eslint-env node*/
+if ("development" === 'production') {
+  module.exports = require('./umd/history.production.min.js');
+} else {
+  module.exports = require('./umd/history.development.js');
+}
+
+},{"./umd/history.development.js":"3n80V"}],"3n80V":[function(require,module,exports) {
+var define;
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports) : typeof define === 'function' && define.amd ? define(['exports'], factory) : (global = typeof globalThis !== 'undefined' ? globalThis : global || self, factory(global.HistoryLibrary = {}));
+})(this, function (exports) {
+  "use strict";
+  function _extends() {
+    _extends = Object.assign || (function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+      return target;
+    });
+    return _extends.apply(this, arguments);
+  }
+  /**
+  * Actions represent the type of change to a location value.
+  *
+  * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#action
+  */
+  exports.Action = void 0;
+  (function (Action) {
+    /**
+    * A POP indicates a change to an arbitrary index in the history stack, such
+    * as a back or forward navigation. It does not describe the direction of the
+    * navigation, only that the current index changed.
+    *
+    * Note: This is the default action for newly created history objects.
+    */
+    Action["Pop"] = "POP";
+    /**
+    * A PUSH indicates a new entry being added to the history stack, such as when
+    * a link is clicked and a new page loads. When this happens, all subsequent
+    * entries in the stack are lost.
+    */
+    Action["Push"] = "PUSH";
+    /**
+    * A REPLACE indicates the entry at the current index in the history stack
+    * being replaced by a new one.
+    */
+    Action["Replace"] = "REPLACE";
+  })(exports.Action || (exports.Action = {}));
+  var readOnly = function (obj) {
+    return Object.freeze(obj);
+  };
+  function warning(cond, message) {
+    if (!cond) {
+      // eslint-disable-next-line no-console
+      if (typeof console !== 'undefined') console.warn(message);
+      try {
+        // Welcome to debugging history!
+        // 
+        // This error is thrown as a convenience so you can more easily
+        // find the source for a warning that appears in the console by
+        // enabling "pause on exceptions" in your JavaScript debugger.
+        throw new Error(message);
+      } catch (e) {}
+    }
+  }
+  var BeforeUnloadEventType = 'beforeunload';
+  var HashChangeEventType = 'hashchange';
+  var PopStateEventType = 'popstate';
+  /**
+  * Browser history stores the location in regular URLs. This is the standard for
+  * most web apps, but it requires some configuration on the server to ensure you
+  * serve the same app at multiple URLs.
+  *
+  * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createbrowserhistory
+  */
+  function createBrowserHistory(options) {
+    if (options === void 0) {
+      options = {};
+    }
+    var _options = options, _options$window = _options.window, window = _options$window === void 0 ? document.defaultView : _options$window;
+    var globalHistory = window.history;
+    function getIndexAndLocation() {
+      var _window$location = window.location, pathname = _window$location.pathname, search = _window$location.search, hash = _window$location.hash;
+      var state = globalHistory.state || ({});
+      return [state.idx, readOnly({
+        pathname: pathname,
+        search: search,
+        hash: hash,
+        state: state.usr || null,
+        key: state.key || 'default'
+      })];
+    }
+    var blockedPopTx = null;
+    function handlePop() {
+      if (blockedPopTx) {
+        blockers.call(blockedPopTx);
+        blockedPopTx = null;
+      } else {
+        var nextAction = exports.Action.Pop;
+        var _getIndexAndLocation = getIndexAndLocation(), nextIndex = _getIndexAndLocation[0], nextLocation = _getIndexAndLocation[1];
+        if (blockers.length) {
+          if (nextIndex != null) {
+            var delta = index - nextIndex;
+            if (delta) {
+              // Revert the POP
+              blockedPopTx = {
+                action: nextAction,
+                location: nextLocation,
+                retry: function retry() {
+                  go(delta * -1);
+                }
+              };
+              go(delta);
+            }
+          } else {
+            // Trying to POP to a location with no index. We did not create
+            // this location, so we can't effectively block the navigation.
+            warning(false, // TODO: Write up a doc that explains our blocking strategy in
+            // detail and link to it here so people can understand better what
+            // is going on and how to avoid it.
+            "You are trying to block a POP navigation to a location that was not " + "created by the history library. The block will fail silently in " + "production, but in general you should do all navigation with the " + "history library (instead of using window.history.pushState directly) " + "to avoid this situation.");
+          }
+        } else {
+          applyTx(nextAction);
+        }
+      }
+    }
+    window.addEventListener(PopStateEventType, handlePop);
+    var action = exports.Action.Pop;
+    var _getIndexAndLocation2 = getIndexAndLocation(), index = _getIndexAndLocation2[0], location = _getIndexAndLocation2[1];
+    var listeners = createEvents();
+    var blockers = createEvents();
+    if (index == null) {
+      index = 0;
+      globalHistory.replaceState(_extends({}, globalHistory.state, {
+        idx: index
+      }), '');
+    }
+    function createHref(to) {
+      return typeof to === 'string' ? to : createPath(to);
+    }
+    // state defaults to `null` because `window.history.state` does
+    function getNextLocation(to, state) {
+      if (state === void 0) {
+        state = null;
+      }
+      return readOnly(_extends({
+        pathname: location.pathname,
+        hash: '',
+        search: ''
+      }, typeof to === 'string' ? parsePath(to) : to, {
+        state: state,
+        key: createKey()
+      }));
+    }
+    function getHistoryStateAndUrl(nextLocation, index) {
+      return [{
+        usr: nextLocation.state,
+        key: nextLocation.key,
+        idx: index
+      }, createHref(nextLocation)];
+    }
+    function allowTx(action, location, retry) {
+      return !blockers.length || (blockers.call({
+        action: action,
+        location: location,
+        retry: retry
+      }), false);
+    }
+    function applyTx(nextAction) {
+      action = nextAction;
+      var _getIndexAndLocation3 = getIndexAndLocation();
+      index = _getIndexAndLocation3[0];
+      location = _getIndexAndLocation3[1];
+      listeners.call({
+        action: action,
+        location: location
+      });
+    }
+    function push(to, state) {
+      var nextAction = exports.Action.Push;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        push(to, state);
+      }
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr = getHistoryStateAndUrl(nextLocation, index + 1), historyState = _getHistoryStateAndUr[0], url = _getHistoryStateAndUr[1];
+        // TODO: Support forced reloading
+        // try...catch because iOS limits us to 100 pushState calls :/
+        try {
+          globalHistory.pushState(historyState, '', url);
+        } catch (error) {
+          // They are going to lose state here, but there is no real
+          // way to warn them about it since the page will refresh...
+          window.location.assign(url);
+        }
+        applyTx(nextAction);
+      }
+    }
+    function replace(to, state) {
+      var nextAction = exports.Action.Replace;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        replace(to, state);
+      }
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr2 = getHistoryStateAndUrl(nextLocation, index), historyState = _getHistoryStateAndUr2[0], url = _getHistoryStateAndUr2[1];
+        // TODO: Support forced reloading
+        globalHistory.replaceState(historyState, '', url);
+        applyTx(nextAction);
+      }
+    }
+    function go(delta) {
+      globalHistory.go(delta);
+    }
+    var history = {
+      get action() {
+        return action;
+      },
+      get location() {
+        return location;
+      },
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      back: function back() {
+        go(-1);
+      },
+      forward: function forward() {
+        go(1);
+      },
+      listen: function listen(listener) {
+        return listeners.push(listener);
+      },
+      block: function block(blocker) {
+        var unblock = blockers.push(blocker);
+        if (blockers.length === 1) {
+          window.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
+        }
+        return function () {
+          unblock();
+          // Remove the beforeunload listener so the document may
+          // still be salvageable in the pagehide event.
+          // See https://html.spec.whatwg.org/#unloading-documents
+          if (!blockers.length) {
+            window.removeEventListener(BeforeUnloadEventType, promptBeforeUnload);
+          }
+        };
+      }
+    };
+    return history;
+  }
+  /**
+  * Hash history stores the location in window.location.hash. This makes it ideal
+  * for situations where you don't want to send the location to the server for
+  * some reason, either because you do cannot configure it or the URL space is
+  * reserved for something else.
+  *
+  * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createhashhistory
+  */
+  function createHashHistory(options) {
+    if (options === void 0) {
+      options = {};
+    }
+    var _options2 = options, _options2$window = _options2.window, window = _options2$window === void 0 ? document.defaultView : _options2$window;
+    var globalHistory = window.history;
+    function getIndexAndLocation() {
+      var _parsePath = parsePath(window.location.hash.substr(1)), _parsePath$pathname = _parsePath.pathname, pathname = _parsePath$pathname === void 0 ? '/' : _parsePath$pathname, _parsePath$search = _parsePath.search, search = _parsePath$search === void 0 ? '' : _parsePath$search, _parsePath$hash = _parsePath.hash, hash = _parsePath$hash === void 0 ? '' : _parsePath$hash;
+      var state = globalHistory.state || ({});
+      return [state.idx, readOnly({
+        pathname: pathname,
+        search: search,
+        hash: hash,
+        state: state.usr || null,
+        key: state.key || 'default'
+      })];
+    }
+    var blockedPopTx = null;
+    function handlePop() {
+      if (blockedPopTx) {
+        blockers.call(blockedPopTx);
+        blockedPopTx = null;
+      } else {
+        var nextAction = exports.Action.Pop;
+        var _getIndexAndLocation4 = getIndexAndLocation(), nextIndex = _getIndexAndLocation4[0], nextLocation = _getIndexAndLocation4[1];
+        if (blockers.length) {
+          if (nextIndex != null) {
+            var delta = index - nextIndex;
+            if (delta) {
+              // Revert the POP
+              blockedPopTx = {
+                action: nextAction,
+                location: nextLocation,
+                retry: function retry() {
+                  go(delta * -1);
+                }
+              };
+              go(delta);
+            }
+          } else {
+            // Trying to POP to a location with no index. We did not create
+            // this location, so we can't effectively block the navigation.
+            warning(false, // TODO: Write up a doc that explains our blocking strategy in
+            // detail and link to it here so people can understand better
+            // what is going on and how to avoid it.
+            "You are trying to block a POP navigation to a location that was not " + "created by the history library. The block will fail silently in " + "production, but in general you should do all navigation with the " + "history library (instead of using window.history.pushState directly) " + "to avoid this situation.");
+          }
+        } else {
+          applyTx(nextAction);
+        }
+      }
+    }
+    window.addEventListener(PopStateEventType, handlePop);
+    // popstate does not fire on hashchange in IE 11 and old (trident) Edge
+    // https://developer.mozilla.org/de/docs/Web/API/Window/popstate_event
+    window.addEventListener(HashChangeEventType, function () {
+      var _getIndexAndLocation5 = getIndexAndLocation(), nextLocation = _getIndexAndLocation5[1];
+      // Ignore extraneous hashchange events.
+      if (createPath(nextLocation) !== createPath(location)) {
+        handlePop();
+      }
+    });
+    var action = exports.Action.Pop;
+    var _getIndexAndLocation6 = getIndexAndLocation(), index = _getIndexAndLocation6[0], location = _getIndexAndLocation6[1];
+    var listeners = createEvents();
+    var blockers = createEvents();
+    if (index == null) {
+      index = 0;
+      globalHistory.replaceState(_extends({}, globalHistory.state, {
+        idx: index
+      }), '');
+    }
+    function getBaseHref() {
+      var base = document.querySelector('base');
+      var href = '';
+      if (base && base.getAttribute('href')) {
+        var url = window.location.href;
+        var hashIndex = url.indexOf('#');
+        href = hashIndex === -1 ? url : url.slice(0, hashIndex);
+      }
+      return href;
+    }
+    function createHref(to) {
+      return getBaseHref() + '#' + (typeof to === 'string' ? to : createPath(to));
+    }
+    function getNextLocation(to, state) {
+      if (state === void 0) {
+        state = null;
+      }
+      return readOnly(_extends({
+        pathname: location.pathname,
+        hash: '',
+        search: ''
+      }, typeof to === 'string' ? parsePath(to) : to, {
+        state: state,
+        key: createKey()
+      }));
+    }
+    function getHistoryStateAndUrl(nextLocation, index) {
+      return [{
+        usr: nextLocation.state,
+        key: nextLocation.key,
+        idx: index
+      }, createHref(nextLocation)];
+    }
+    function allowTx(action, location, retry) {
+      return !blockers.length || (blockers.call({
+        action: action,
+        location: location,
+        retry: retry
+      }), false);
+    }
+    function applyTx(nextAction) {
+      action = nextAction;
+      var _getIndexAndLocation7 = getIndexAndLocation();
+      index = _getIndexAndLocation7[0];
+      location = _getIndexAndLocation7[1];
+      listeners.call({
+        action: action,
+        location: location
+      });
+    }
+    function push(to, state) {
+      var nextAction = exports.Action.Push;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        push(to, state);
+      }
+      warning(nextLocation.pathname.charAt(0) === '/', "Relative pathnames are not supported in hash history.push(" + JSON.stringify(to) + ")");
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr3 = getHistoryStateAndUrl(nextLocation, index + 1), historyState = _getHistoryStateAndUr3[0], url = _getHistoryStateAndUr3[1];
+        // TODO: Support forced reloading
+        // try...catch because iOS limits us to 100 pushState calls :/
+        try {
+          globalHistory.pushState(historyState, '', url);
+        } catch (error) {
+          // They are going to lose state here, but there is no real
+          // way to warn them about it since the page will refresh...
+          window.location.assign(url);
+        }
+        applyTx(nextAction);
+      }
+    }
+    function replace(to, state) {
+      var nextAction = exports.Action.Replace;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        replace(to, state);
+      }
+      warning(nextLocation.pathname.charAt(0) === '/', "Relative pathnames are not supported in hash history.replace(" + JSON.stringify(to) + ")");
+      if (allowTx(nextAction, nextLocation, retry)) {
+        var _getHistoryStateAndUr4 = getHistoryStateAndUrl(nextLocation, index), historyState = _getHistoryStateAndUr4[0], url = _getHistoryStateAndUr4[1];
+        // TODO: Support forced reloading
+        globalHistory.replaceState(historyState, '', url);
+        applyTx(nextAction);
+      }
+    }
+    function go(delta) {
+      globalHistory.go(delta);
+    }
+    var history = {
+      get action() {
+        return action;
+      },
+      get location() {
+        return location;
+      },
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      back: function back() {
+        go(-1);
+      },
+      forward: function forward() {
+        go(1);
+      },
+      listen: function listen(listener) {
+        return listeners.push(listener);
+      },
+      block: function block(blocker) {
+        var unblock = blockers.push(blocker);
+        if (blockers.length === 1) {
+          window.addEventListener(BeforeUnloadEventType, promptBeforeUnload);
+        }
+        return function () {
+          unblock();
+          // Remove the beforeunload listener so the document may
+          // still be salvageable in the pagehide event.
+          // See https://html.spec.whatwg.org/#unloading-documents
+          if (!blockers.length) {
+            window.removeEventListener(BeforeUnloadEventType, promptBeforeUnload);
+          }
+        };
+      }
+    };
+    return history;
+  }
+  /**
+  * Memory history stores the current location in memory. It is designed for use
+  * in stateful non-browser environments like tests and React Native.
+  *
+  * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#creatememoryhistory
+  */
+  function createMemoryHistory(options) {
+    if (options === void 0) {
+      options = {};
+    }
+    var _options3 = options, _options3$initialEntr = _options3.initialEntries, initialEntries = _options3$initialEntr === void 0 ? ['/'] : _options3$initialEntr, initialIndex = _options3.initialIndex;
+    var entries = initialEntries.map(function (entry) {
+      var location = readOnly(_extends({
+        pathname: '/',
+        search: '',
+        hash: '',
+        state: null,
+        key: createKey()
+      }, typeof entry === 'string' ? parsePath(entry) : entry));
+      warning(location.pathname.charAt(0) === '/', "Relative pathnames are not supported in createMemoryHistory({ initialEntries }) (invalid entry: " + JSON.stringify(entry) + ")");
+      return location;
+    });
+    var index = clamp(initialIndex == null ? entries.length - 1 : initialIndex, 0, entries.length - 1);
+    var action = exports.Action.Pop;
+    var location = entries[index];
+    var listeners = createEvents();
+    var blockers = createEvents();
+    function createHref(to) {
+      return typeof to === 'string' ? to : createPath(to);
+    }
+    function getNextLocation(to, state) {
+      if (state === void 0) {
+        state = null;
+      }
+      return readOnly(_extends({
+        pathname: location.pathname,
+        search: '',
+        hash: ''
+      }, typeof to === 'string' ? parsePath(to) : to, {
+        state: state,
+        key: createKey()
+      }));
+    }
+    function allowTx(action, location, retry) {
+      return !blockers.length || (blockers.call({
+        action: action,
+        location: location,
+        retry: retry
+      }), false);
+    }
+    function applyTx(nextAction, nextLocation) {
+      action = nextAction;
+      location = nextLocation;
+      listeners.call({
+        action: action,
+        location: location
+      });
+    }
+    function push(to, state) {
+      var nextAction = exports.Action.Push;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        push(to, state);
+      }
+      warning(location.pathname.charAt(0) === '/', "Relative pathnames are not supported in memory history.push(" + JSON.stringify(to) + ")");
+      if (allowTx(nextAction, nextLocation, retry)) {
+        index += 1;
+        entries.splice(index, entries.length, nextLocation);
+        applyTx(nextAction, nextLocation);
+      }
+    }
+    function replace(to, state) {
+      var nextAction = exports.Action.Replace;
+      var nextLocation = getNextLocation(to, state);
+      function retry() {
+        replace(to, state);
+      }
+      warning(location.pathname.charAt(0) === '/', "Relative pathnames are not supported in memory history.replace(" + JSON.stringify(to) + ")");
+      if (allowTx(nextAction, nextLocation, retry)) {
+        entries[index] = nextLocation;
+        applyTx(nextAction, nextLocation);
+      }
+    }
+    function go(delta) {
+      var nextIndex = clamp(index + delta, 0, entries.length - 1);
+      var nextAction = exports.Action.Pop;
+      var nextLocation = entries[nextIndex];
+      function retry() {
+        go(delta);
+      }
+      if (allowTx(nextAction, nextLocation, retry)) {
+        index = nextIndex;
+        applyTx(nextAction, nextLocation);
+      }
+    }
+    var history = {
+      get index() {
+        return index;
+      },
+      get action() {
+        return action;
+      },
+      get location() {
+        return location;
+      },
+      createHref: createHref,
+      push: push,
+      replace: replace,
+      go: go,
+      back: function back() {
+        go(-1);
+      },
+      forward: function forward() {
+        go(1);
+      },
+      listen: function listen(listener) {
+        return listeners.push(listener);
+      },
+      block: function block(blocker) {
+        return blockers.push(blocker);
+      }
+    };
+    return history;
+  }
+  // //////////////////////////////////////////////////////////////////////////////
+  // UTILS
+  // //////////////////////////////////////////////////////////////////////////////
+  function clamp(n, lowerBound, upperBound) {
+    return Math.min(Math.max(n, lowerBound), upperBound);
+  }
+  function promptBeforeUnload(event) {
+    // Cancel the event.
+    event.preventDefault();
+    // Chrome (and legacy IE) requires returnValue to be set.
+    event.returnValue = '';
+  }
+  function createEvents() {
+    var handlers = [];
+    return {
+      get length() {
+        return handlers.length;
+      },
+      push: function push(fn) {
+        handlers.push(fn);
+        return function () {
+          handlers = handlers.filter(function (handler) {
+            return handler !== fn;
+          });
+        };
+      },
+      call: function call(arg) {
+        handlers.forEach(function (fn) {
+          return fn && fn(arg);
+        });
+      }
+    };
+  }
+  function createKey() {
+    return Math.random().toString(36).substr(2, 8);
+  }
+  /**
+  * Creates a string URL path from the given pathname, search, and hash components.
+  *
+  * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#createpath
+  */
+  function createPath(_ref) {
+    var _ref$pathname = _ref.pathname, pathname = _ref$pathname === void 0 ? '/' : _ref$pathname, _ref$search = _ref.search, search = _ref$search === void 0 ? '' : _ref$search, _ref$hash = _ref.hash, hash = _ref$hash === void 0 ? '' : _ref$hash;
+    if (search && search !== '?') pathname += search.charAt(0) === '?' ? search : '?' + search;
+    if (hash && hash !== '#') pathname += hash.charAt(0) === '#' ? hash : '#' + hash;
+    return pathname;
+  }
+  /**
+  * Parses a string URL path into its separate pathname, search, and hash components.
+  *
+  * @see https://github.com/remix-run/history/tree/main/docs/api-reference.md#parsepath
+  */
+  function parsePath(path) {
+    var parsedPath = {};
+    if (path) {
+      var hashIndex = path.indexOf('#');
+      if (hashIndex >= 0) {
+        parsedPath.hash = path.substr(hashIndex);
+        path = path.substr(0, hashIndex);
+      }
+      var searchIndex = path.indexOf('?');
+      if (searchIndex >= 0) {
+        parsedPath.search = path.substr(searchIndex);
+        path = path.substr(0, searchIndex);
+      }
+      if (path) {
+        parsedPath.pathname = path;
+      }
+    }
+    return parsedPath;
+  }
+  exports.createBrowserHistory = createBrowserHistory;
+  exports.createHashHistory = createHashHistory;
+  exports.createMemoryHistory = createMemoryHistory;
+  exports.createPath = createPath;
+  exports.parsePath = parsePath;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{}],"2A6lS":[function(require,module,exports) {
+/**
+* React Router v6.3.0
+*
+* Copyright (c) Remix Software Inc.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE.md file in the root directory of this source tree.
+*
+* @license MIT
+*/
+"use strict";
+/*eslint-env node*/
+if ("development" === "production") {
+  module.exports = require("./umd/react-router.production.min.js");
+} else {
+  module.exports = require("./umd/react-router.development.js");
+}
+
+},{"./umd/react-router.development.js":"6Nne7"}],"6Nne7":[function(require,module,exports) {
+var define;
+/**
+* React Router v6.3.0
+*
+* Copyright (c) Remix Software Inc.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE.md file in the root directory of this source tree.
+*
+* @license MIT
+*/
+(function (global, factory) {
+  typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('history'), require('react')) : typeof define === 'function' && define.amd ? define(['exports', 'history', 'react'], factory) : (global = global || self, factory(global.ReactRouter = {}, global.HistoryLibrary, global.React));
+})(this, function (exports, history, React) {
+  "use strict";
+  const NavigationContext = /*#__PURE__*/React.createContext(null);
+  {
+    NavigationContext.displayName = "Navigation";
+  }
+  const LocationContext = /*#__PURE__*/React.createContext(null);
+  {
+    LocationContext.displayName = "Location";
+  }
+  const RouteContext = /*#__PURE__*/React.createContext({
+    outlet: null,
+    matches: []
+  });
+  {
+    RouteContext.displayName = "Route";
+  }
+  function invariant(cond, message) {
+    if (!cond) throw new Error(message);
+  }
+  function warning(cond, message) {
+    if (!cond) {
+      // eslint-disable-next-line no-console
+      if (typeof console !== "undefined") console.warn(message);
+      try {
+        // Welcome to debugging React Router!
+        // 
+        // This error is thrown as a convenience so you can more easily
+        // find the source for a warning that appears in the console by
+        // enabling "pause on exceptions" in your JavaScript debugger.
+        throw new Error(message);
+      } catch (e) {}
+    }
+  }
+  const alreadyWarned = {};
+  function warningOnce(key, cond, message) {
+    if (!cond && !alreadyWarned[key]) {
+      alreadyWarned[key] = true;
+      warning(false, message);
+    }
+  }
+  /**
+  * Returns a path with params interpolated.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#generatepath
+  */
+  function generatePath(path, params) {
+    if (params === void 0) {
+      params = {};
+    }
+    return path.replace(/:(\w+)/g, (_, key) => {
+      !(params[key] != null) ? invariant(false, "Missing \":" + key + "\" param") : void 0;
+      return params[key];
+    }).replace(/\/*\*$/, _ => params["*"] == null ? "" : params["*"].replace(/^\/*/, "/"));
+  }
+  /**
+  * A RouteMatch contains info about how a route matched a URL.
+  */
+  /**
+  * Matches the given routes to a location and returns the match data.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#matchroutes
+  */
+  function matchRoutes(routes, locationArg, basename) {
+    if (basename === void 0) {
+      basename = "/";
+    }
+    let location = typeof locationArg === "string" ? history.parsePath(locationArg) : locationArg;
+    let pathname = stripBasename(location.pathname || "/", basename);
+    if (pathname == null) {
+      return null;
+    }
+    let branches = flattenRoutes(routes);
+    rankRouteBranches(branches);
+    let matches = null;
+    for (let i = 0; matches == null && i < branches.length; ++i) {
+      matches = matchRouteBranch(branches[i], pathname);
+    }
+    return matches;
+  }
+  function flattenRoutes(routes, branches, parentsMeta, parentPath) {
+    if (branches === void 0) {
+      branches = [];
+    }
+    if (parentsMeta === void 0) {
+      parentsMeta = [];
+    }
+    if (parentPath === void 0) {
+      parentPath = "";
+    }
+    routes.forEach((route, index) => {
+      let meta = {
+        relativePath: route.path || "",
+        caseSensitive: route.caseSensitive === true,
+        childrenIndex: index,
+        route
+      };
+      if (meta.relativePath.startsWith("/")) {
+        !meta.relativePath.startsWith(parentPath) ? invariant(false, "Absolute route path \"" + meta.relativePath + "\" nested under path " + ("\"" + parentPath + "\" is not valid. An absolute child route path ") + "must start with the combined path of all its parent routes.") : void 0;
+        meta.relativePath = meta.relativePath.slice(parentPath.length);
+      }
+      let path = joinPaths([parentPath, meta.relativePath]);
+      let routesMeta = parentsMeta.concat(meta);
+      // Add the children before adding this route to the array so we traverse the
+      // route tree depth-first and child routes appear before their parents in
+      // the "flattened" version.
+      if (route.children && route.children.length > 0) {
+        !(route.index !== true) ? invariant(false, "Index routes must not have child routes. Please remove " + ("all child routes from route path \"" + path + "\".")) : void 0;
+        flattenRoutes(route.children, branches, routesMeta, path);
+      }
+      // Routes without a path shouldn't ever match by themselves unless they are
+      // index routes, so don't add them to the list of possible branches.
+      if (route.path == null && !route.index) {
+        return;
+      }
+      branches.push({
+        path,
+        score: computeScore(path, route.index),
+        routesMeta
+      });
+    });
+    return branches;
+  }
+  function rankRouteBranches(branches) {
+    branches.sort((a, b) => a.score !== b.score ? b.score - a.score : // Higher score first
+    compareIndexes(a.routesMeta.map(meta => meta.childrenIndex), b.routesMeta.map(meta => meta.childrenIndex)));
+  }
+  const paramRe = /^:\w+$/;
+  const dynamicSegmentValue = 3;
+  const indexRouteValue = 2;
+  const emptySegmentValue = 1;
+  const staticSegmentValue = 10;
+  const splatPenalty = -2;
+  const isSplat = s => s === "*";
+  function computeScore(path, index) {
+    let segments = path.split("/");
+    let initialScore = segments.length;
+    if (segments.some(isSplat)) {
+      initialScore += splatPenalty;
+    }
+    if (index) {
+      initialScore += indexRouteValue;
+    }
+    return segments.filter(s => !isSplat(s)).reduce((score, segment) => score + (paramRe.test(segment) ? dynamicSegmentValue : segment === "" ? emptySegmentValue : staticSegmentValue), initialScore);
+  }
+  function compareIndexes(a, b) {
+    let siblings = a.length === b.length && a.slice(0, -1).every((n, i) => n === b[i]);
+    return siblings ? // If two routes are siblings, we should try to match the earlier sibling
+    // first. This allows people to have fine-grained control over the matching
+    // behavior by simply putting routes with identical paths in the order they
+    // want them tried.
+    a[a.length - 1] - b[b.length - 1] : // Otherwise, it doesn't really make sense to rank non-siblings by index,
+    // so they sort equally.
+    0;
+  }
+  function matchRouteBranch(branch, pathname) {
+    let {routesMeta} = branch;
+    let matchedParams = {};
+    let matchedPathname = "/";
+    let matches = [];
+    for (let i = 0; i < routesMeta.length; ++i) {
+      let meta = routesMeta[i];
+      let end = i === routesMeta.length - 1;
+      let remainingPathname = matchedPathname === "/" ? pathname : pathname.slice(matchedPathname.length) || "/";
+      let match = matchPath({
+        path: meta.relativePath,
+        caseSensitive: meta.caseSensitive,
+        end
+      }, remainingPathname);
+      if (!match) return null;
+      Object.assign(matchedParams, match.params);
+      let route = meta.route;
+      matches.push({
+        params: matchedParams,
+        pathname: joinPaths([matchedPathname, match.pathname]),
+        pathnameBase: normalizePathname(joinPaths([matchedPathname, match.pathnameBase])),
+        route
+      });
+      if (match.pathnameBase !== "/") {
+        matchedPathname = joinPaths([matchedPathname, match.pathnameBase]);
+      }
+    }
+    return matches;
+  }
+  /**
+  * A PathPattern is used to match on some portion of a URL pathname.
+  */
+  /**
+  * Performs pattern matching on a URL pathname and returns information about
+  * the match.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#matchpath
+  */
+  function matchPath(pattern, pathname) {
+    if (typeof pattern === "string") {
+      pattern = {
+        path: pattern,
+        caseSensitive: false,
+        end: true
+      };
+    }
+    let [matcher, paramNames] = compilePath(pattern.path, pattern.caseSensitive, pattern.end);
+    let match = pathname.match(matcher);
+    if (!match) return null;
+    let matchedPathname = match[0];
+    let pathnameBase = matchedPathname.replace(/(.)\/+$/, "$1");
+    let captureGroups = match.slice(1);
+    let params = paramNames.reduce((memo, paramName, index) => {
+      // We need to compute the pathnameBase here using the raw splat value
+      // instead of using params["*"] later because it will be decoded then
+      if (paramName === "*") {
+        let splatValue = captureGroups[index] || "";
+        pathnameBase = matchedPathname.slice(0, matchedPathname.length - splatValue.length).replace(/(.)\/+$/, "$1");
+      }
+      memo[paramName] = safelyDecodeURIComponent(captureGroups[index] || "", paramName);
+      return memo;
+    }, {});
+    return {
+      params,
+      pathname: matchedPathname,
+      pathnameBase,
+      pattern
+    };
+  }
+  function compilePath(path, caseSensitive, end) {
+    if (caseSensitive === void 0) {
+      caseSensitive = false;
+    }
+    if (end === void 0) {
+      end = true;
+    }
+    warning(path === "*" || !path.endsWith("*") || path.endsWith("/*"), "Route path \"" + path + "\" will be treated as if it were " + ("\"" + path.replace(/\*$/, "/*") + "\" because the `*` character must ") + "always follow a `/` in the pattern. To get rid of this warning, " + ("please change the route path to \"" + path.replace(/\*$/, "/*") + "\"."));
+    let paramNames = [];
+    let regexpSource = "^" + path.replace(/\/*\*?$/, "").// Ignore trailing / and /*, we'll handle it below
+    replace(/^\/*/, "/").// Make sure it has a leading /
+    replace(/[\\.*+^$?{}|()[\]]/g, "\\$&").// Escape special regex chars
+    replace(/:(\w+)/g, (_, paramName) => {
+      paramNames.push(paramName);
+      return "([^\\/]+)";
+    });
+    if (path.endsWith("*")) {
+      paramNames.push("*");
+      regexpSource += path === "*" || path === "/*" ? "(.*)$" : /*Already matched the initial /, just match the rest*/
+      "(?:\\/(.+)|\\/*)$";
+    } else {
+      regexpSource += end ? "\\/*$" : /*When matching to the end, ignore trailing slashes*/
+      // Otherwise, match a word boundary or a proceeding /. The word boundary restricts
+      // parent routes to matching only their own words and nothing more, e.g. parent
+      // route "/home" should not match "/home2".
+      // Additionally, allow paths starting with `.`, `-`, `~`, and url-encoded entities,
+      // but do not consume the character in the matched path so they can match against
+      // nested paths.
+      "(?:(?=[.~-]|%[0-9A-F]{2})|\\b|\\/|$)";
+    }
+    let matcher = new RegExp(regexpSource, caseSensitive ? undefined : "i");
+    return [matcher, paramNames];
+  }
+  function safelyDecodeURIComponent(value, paramName) {
+    try {
+      return decodeURIComponent(value);
+    } catch (error) {
+      warning(false, "The value for the URL param \"" + paramName + "\" will not be decoded because" + (" the string \"" + value + "\" is a malformed URL segment. This is probably") + (" due to a bad percent encoding (" + error + ")."));
+      return value;
+    }
+  }
+  /**
+  * Returns a resolved path object relative to the given pathname.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#resolvepath
+  */
+  function resolvePath(to, fromPathname) {
+    if (fromPathname === void 0) {
+      fromPathname = "/";
+    }
+    let {pathname: toPathname, search = "", hash = ""} = typeof to === "string" ? history.parsePath(to) : to;
+    let pathname = toPathname ? toPathname.startsWith("/") ? toPathname : resolvePathname(toPathname, fromPathname) : fromPathname;
+    return {
+      pathname,
+      search: normalizeSearch(search),
+      hash: normalizeHash(hash)
+    };
+  }
+  function resolvePathname(relativePath, fromPathname) {
+    let segments = fromPathname.replace(/\/+$/, "").split("/");
+    let relativeSegments = relativePath.split("/");
+    relativeSegments.forEach(segment => {
+      if (segment === "..") {
+        // Keep the root "" segment so the pathname starts at /
+        if (segments.length > 1) segments.pop();
+      } else if (segment !== ".") {
+        segments.push(segment);
+      }
+    });
+    return segments.length > 1 ? segments.join("/") : "/";
+  }
+  function resolveTo(toArg, routePathnames, locationPathname) {
+    let to = typeof toArg === "string" ? history.parsePath(toArg) : toArg;
+    let toPathname = toArg === "" || to.pathname === "" ? "/" : to.pathname;
+    // If a pathname is explicitly provided in `to`, it should be relative to the
+    // route context. This is explained in `Note on `<Link to>` values` in our
+    // migration guide from v5 as a means of disambiguation between `to` values
+    // that begin with `/` and those that do not. However, this is problematic for
+    // `to` values that do not provide a pathname. `to` can simply be a search or
+    // hash string, in which case we should assume that the navigation is relative
+    // to the current location's pathname and *not* the route pathname.
+    let from;
+    if (toPathname == null) {
+      from = locationPathname;
+    } else {
+      let routePathnameIndex = routePathnames.length - 1;
+      if (toPathname.startsWith("..")) {
+        let toSegments = toPathname.split("/");
+        // Each leading .. segment means "go up one route" instead of "go up one
+        // URL segment".  This is a key difference from how <a href> works and a
+        // major reason we call this a "to" value instead of a "href".
+        while (toSegments[0] === "..") {
+          toSegments.shift();
+          routePathnameIndex -= 1;
+        }
+        to.pathname = toSegments.join("/");
+      }
+      // If there are more ".." segments than parent routes, resolve relative to
+      // the root / URL.
+      from = routePathnameIndex >= 0 ? routePathnames[routePathnameIndex] : "/";
+    }
+    let path = resolvePath(to, from);
+    // Ensure the pathname has a trailing slash if the original to value had one.
+    if (toPathname && toPathname !== "/" && toPathname.endsWith("/") && !path.pathname.endsWith("/")) {
+      path.pathname += "/";
+    }
+    return path;
+  }
+  function getToPathname(to) {
+    // Empty strings should be treated the same as / paths
+    return to === "" || to.pathname === "" ? "/" : typeof to === "string" ? history.parsePath(to).pathname : to.pathname;
+  }
+  function stripBasename(pathname, basename) {
+    if (basename === "/") return pathname;
+    if (!pathname.toLowerCase().startsWith(basename.toLowerCase())) {
+      return null;
+    }
+    let nextChar = pathname.charAt(basename.length);
+    if (nextChar && nextChar !== "/") {
+      // pathname does not start with basename/
+      return null;
+    }
+    return pathname.slice(basename.length) || "/";
+  }
+  const joinPaths = paths => paths.join("/").replace(/\/\/+/g, "/");
+  const normalizePathname = pathname => pathname.replace(/\/+$/, "").replace(/^\/*/, "/");
+  const normalizeSearch = search => !search || search === "?" ? "" : search.startsWith("?") ? search : "?" + search;
+  const normalizeHash = hash => !hash || hash === "#" ? "" : hash.startsWith("#") ? hash : "#" + hash;
+  /**
+  * Returns the full href for the given "to" value. This is useful for building
+  * custom links that are also accessible and preserve right-click behavior.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#usehref
+  */
+  function useHref(to) {
+    !useInRouterContext() ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useHref() may be used only in the context of a <Router> component.") : void 0;
+    let {basename, navigator} = React.useContext(NavigationContext);
+    let {hash, pathname, search} = useResolvedPath(to);
+    let joinedPathname = pathname;
+    if (basename !== "/") {
+      let toPathname = getToPathname(to);
+      let endsWithSlash = toPathname != null && toPathname.endsWith("/");
+      joinedPathname = pathname === "/" ? basename + (endsWithSlash ? "/" : "") : joinPaths([basename, pathname]);
+    }
+    return navigator.createHref({
+      pathname: joinedPathname,
+      search,
+      hash
+    });
+  }
+  /**
+  * Returns true if this component is a descendant of a <Router>.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#useinroutercontext
+  */
+  function useInRouterContext() {
+    return React.useContext(LocationContext) != null;
+  }
+  /**
+  * Returns the current location object, which represents the current URL in web
+  * browsers.
+  *
+  * Note: If you're using this it may mean you're doing some of your own
+  * "routing" in your app, and we'd like to know what your use case is. We may
+  * be able to provide something higher-level to better suit your needs.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#uselocation
+  */
+  function useLocation() {
+    !useInRouterContext() ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useLocation() may be used only in the context of a <Router> component.") : void 0;
+    return React.useContext(LocationContext).location;
+  }
+  /**
+  * Returns the current navigation action which describes how the router came to
+  * the current location, either by a pop, push, or replace on the history stack.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#usenavigationtype
+  */
+  function useNavigationType() {
+    return React.useContext(LocationContext).navigationType;
+  }
+  /**
+  * Returns true if the URL for the given "to" value matches the current URL.
+  * This is useful for components that need to know "active" state, e.g.
+  * <NavLink>.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#usematch
+  */
+  function useMatch(pattern) {
+    !useInRouterContext() ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useMatch() may be used only in the context of a <Router> component.") : void 0;
+    let {pathname} = useLocation();
+    return React.useMemo(() => matchPath(pattern, pathname), [pathname, pattern]);
+  }
+  /**
+  * The interface for the navigate() function returned from useNavigate().
+  */
+  /**
+  * Returns an imperative method for changing the location. Used by <Link>s, but
+  * may also be used by other elements to change the location.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#usenavigate
+  */
+  function useNavigate() {
+    !useInRouterContext() ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useNavigate() may be used only in the context of a <Router> component.") : void 0;
+    let {basename, navigator} = React.useContext(NavigationContext);
+    let {matches} = React.useContext(RouteContext);
+    let {pathname: locationPathname} = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map(match => match.pathnameBase));
+    let activeRef = React.useRef(false);
+    React.useEffect(() => {
+      activeRef.current = true;
+    });
+    let navigate = React.useCallback(function (to, options) {
+      if (options === void 0) {
+        options = {};
+      }
+      warning(activeRef.current, "You should call navigate() in a React.useEffect(), not when " + "your component is first rendered.");
+      if (!activeRef.current) return;
+      if (typeof to === "number") {
+        navigator.go(to);
+        return;
+      }
+      let path = resolveTo(to, JSON.parse(routePathnamesJson), locationPathname);
+      if (basename !== "/") {
+        path.pathname = joinPaths([basename, path.pathname]);
+      }
+      (!!options.replace ? navigator.replace : navigator.push)(path, options.state);
+    }, [basename, navigator, routePathnamesJson, locationPathname]);
+    return navigate;
+  }
+  const OutletContext = /*#__PURE__*/React.createContext(null);
+  /**
+  * Returns the context (if provided) for the child route at this level of the route
+  * hierarchy.
+  * @see https://reactrouter.com/docs/en/v6/api#useoutletcontext
+  */
+  function useOutletContext() {
+    return React.useContext(OutletContext);
+  }
+  /**
+  * Returns the element for the child route at this level of the route
+  * hierarchy. Used internally by <Outlet> to render child routes.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#useoutlet
+  */
+  function useOutlet(context) {
+    let outlet = React.useContext(RouteContext).outlet;
+    if (outlet) {
+      return (
+        /*#__PURE__*/React.createElement(OutletContext.Provider, {
+          value: context
+        }, outlet)
+      );
+    }
+    return outlet;
+  }
+  /**
+  * Returns an object of key/value pairs of the dynamic params from the current
+  * URL that were matched by the route path.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#useparams
+  */
+  function useParams() {
+    let {matches} = React.useContext(RouteContext);
+    let routeMatch = matches[matches.length - 1];
+    return routeMatch ? routeMatch.params : {};
+  }
+  /**
+  * Resolves the pathname of the given `to` value against the current location.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#useresolvedpath
+  */
+  function useResolvedPath(to) {
+    let {matches} = React.useContext(RouteContext);
+    let {pathname: locationPathname} = useLocation();
+    let routePathnamesJson = JSON.stringify(matches.map(match => match.pathnameBase));
+    return React.useMemo(() => resolveTo(to, JSON.parse(routePathnamesJson), locationPathname), [to, routePathnamesJson, locationPathname]);
+  }
+  /**
+  * Returns the element of the route that matched the current location, prepared
+  * with the correct context to render the remainder of the route tree. Route
+  * elements in the tree must render an <Outlet> to render their child route's
+  * element.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#useroutes
+  */
+  function useRoutes(routes, locationArg) {
+    !useInRouterContext() ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of the
+    // router loaded. We can help them understand how to avoid that.
+    "useRoutes() may be used only in the context of a <Router> component.") : void 0;
+    let {matches: parentMatches} = React.useContext(RouteContext);
+    let routeMatch = parentMatches[parentMatches.length - 1];
+    let parentParams = routeMatch ? routeMatch.params : {};
+    let parentPathname = routeMatch ? routeMatch.pathname : "/";
+    let parentPathnameBase = routeMatch ? routeMatch.pathnameBase : "/";
+    let parentRoute = routeMatch && routeMatch.route;
+    {
+      // You won't get a warning about 2 different <Routes> under a <Route>
+      // without a trailing *, but this is a best-effort warning anyway since we
+      // cannot even give the warning unless they land at the parent route.
+      // 
+      // Example:
+      // 
+      // <Routes>
+      // {/* This route path MUST end with /* because otherwise
+      // it will never match /blog/post/123 */}
+      // <Route path="blog" element={<Blog />} />
+      // <Route path="blog/feed" element={<BlogFeed />} />
+      // </Routes>
+      // 
+      // function Blog() {
+      // return (
+      // <Routes>
+      // <Route path="post/:id" element={<Post />} />
+      // </Routes>
+      // );
+      // }
+      let parentPath = parentRoute && parentRoute.path || "";
+      warningOnce(parentPathname, !parentRoute || parentPath.endsWith("*"), "You rendered descendant <Routes> (or called `useRoutes()`) at " + ("\"" + parentPathname + "\" (under <Route path=\"" + parentPath + "\">) but the ") + "parent route path has no trailing \"*\". This means if you navigate " + "deeper, the parent won't match anymore and therefore the child " + "routes will never render.\n\n" + ("Please change the parent <Route path=\"" + parentPath + "\"> to <Route ") + ("path=\"" + (parentPath === "/" ? "*" : parentPath + "/*") + "\">."));
+    }
+    let locationFromContext = useLocation();
+    let location;
+    if (locationArg) {
+      var _parsedLocationArg$pa;
+      let parsedLocationArg = typeof locationArg === "string" ? history.parsePath(locationArg) : locationArg;
+      !(parentPathnameBase === "/" || ((_parsedLocationArg$pa = parsedLocationArg.pathname) == null ? void 0 : _parsedLocationArg$pa.startsWith(parentPathnameBase))) ? invariant(false, "When overriding the location using `<Routes location>` or `useRoutes(routes, location)`, " + "the location pathname must begin with the portion of the URL pathname that was " + ("matched by all parent routes. The current pathname base is \"" + parentPathnameBase + "\" ") + ("but pathname \"" + parsedLocationArg.pathname + "\" was given in the `location` prop.")) : void 0;
+      location = parsedLocationArg;
+    } else {
+      location = locationFromContext;
+    }
+    let pathname = location.pathname || "/";
+    let remainingPathname = parentPathnameBase === "/" ? pathname : pathname.slice(parentPathnameBase.length) || "/";
+    let matches = matchRoutes(routes, {
+      pathname: remainingPathname
+    });
+    {
+      warning(parentRoute || matches != null, "No routes matched location \"" + location.pathname + location.search + location.hash + "\" ");
+      warning(matches == null || matches[matches.length - 1].route.element !== undefined, "Matched leaf route at location \"" + location.pathname + location.search + location.hash + "\" does not have an element. " + "This means it will render an <Outlet /> with a null value by default resulting in an \"empty\" page.");
+    }
+    return _renderMatches(matches && matches.map(match => Object.assign({}, match, {
+      params: Object.assign({}, parentParams, match.params),
+      pathname: joinPaths([parentPathnameBase, match.pathname]),
+      pathnameBase: match.pathnameBase === "/" ? parentPathnameBase : joinPaths([parentPathnameBase, match.pathnameBase])
+    })), parentMatches);
+  }
+  function _renderMatches(matches, parentMatches) {
+    if (parentMatches === void 0) {
+      parentMatches = [];
+    }
+    if (matches == null) return null;
+    return matches.reduceRight((outlet, match, index) => {
+      return (
+        /*#__PURE__*/React.createElement(RouteContext.Provider, {
+          children: match.route.element !== undefined ? match.route.element : outlet,
+          value: {
+            outlet,
+            matches: parentMatches.concat(matches.slice(0, index + 1))
+          }
+        })
+      );
+    }, null);
+  }
+  /**
+  * A <Router> that stores all entries in memory.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#memoryrouter
+  */
+  function MemoryRouter(_ref) {
+    let {basename, children, initialEntries, initialIndex} = _ref;
+    let historyRef = React.useRef();
+    if (historyRef.current == null) {
+      historyRef.current = history.createMemoryHistory({
+        initialEntries,
+        initialIndex
+      });
+    }
+    let history$1 = historyRef.current;
+    let [state, setState] = React.useState({
+      action: history$1.action,
+      location: history$1.location
+    });
+    React.useLayoutEffect(() => history$1.listen(setState), [history$1]);
+    return (
+      /*#__PURE__*/React.createElement(Router, {
+        basename: basename,
+        children: children,
+        location: state.location,
+        navigationType: state.action,
+        navigator: history$1
+      })
+    );
+  }
+  /**
+  * Changes the current location.
+  *
+  * Note: This API is mostly useful in React.Component subclasses that are not
+  * able to use hooks. In functional components, we recommend you use the
+  * `useNavigate` hook instead.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#navigate
+  */
+  function Navigate(_ref2) {
+    let {to, replace, state} = _ref2;
+    !useInRouterContext() ? invariant(false, // TODO: This error is probably because they somehow have 2 versions of
+    // the router loaded. We can help them understand how to avoid that.
+    "<Navigate> may be used only in the context of a <Router> component.") : void 0;
+    warning(!React.useContext(NavigationContext).static, "<Navigate> must not be used on the initial render in a <StaticRouter>. " + "This is a no-op, but you should modify your code so the <Navigate> is " + "only ever rendered in response to some user interaction or state change.");
+    let navigate = useNavigate();
+    React.useEffect(() => {
+      navigate(to, {
+        replace,
+        state
+      });
+    });
+    return null;
+  }
+  /**
+  * Renders the child route's element, if there is one.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#outlet
+  */
+  function Outlet(props) {
+    return useOutlet(props.context);
+  }
+  /**
+  * Declares an element that should be rendered at a certain URL path.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#route
+  */
+  function Route(_props) {
+    invariant(false, "A <Route> is only ever to be used as the child of <Routes> element, " + "never rendered directly. Please wrap your <Route> in a <Routes>.");
+  }
+  /**
+  * Provides location context for the rest of the app.
+  *
+  * Note: You usually won't render a <Router> directly. Instead, you'll render a
+  * router that is more specific to your environment such as a <BrowserRouter>
+  * in web browsers or a <StaticRouter> for server rendering.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#router
+  */
+  function Router(_ref3) {
+    let {basename: basenameProp = "/", children = null, location: locationProp, navigationType = history.Action.Pop, navigator, static: staticProp = false} = _ref3;
+    !!useInRouterContext() ? invariant(false, "You cannot render a <Router> inside another <Router>." + " You should never have more than one in your app.") : void 0;
+    let basename = normalizePathname(basenameProp);
+    let navigationContext = React.useMemo(() => ({
+      basename,
+      navigator,
+      static: staticProp
+    }), [basename, navigator, staticProp]);
+    if (typeof locationProp === "string") {
+      locationProp = history.parsePath(locationProp);
+    }
+    let {pathname = "/", search = "", hash = "", state = null, key = "default"} = locationProp;
+    let location = React.useMemo(() => {
+      let trailingPathname = stripBasename(pathname, basename);
+      if (trailingPathname == null) {
+        return null;
+      }
+      return {
+        pathname: trailingPathname,
+        search,
+        hash,
+        state,
+        key
+      };
+    }, [basename, pathname, search, hash, state, key]);
+    warning(location != null, "<Router basename=\"" + basename + "\"> is not able to match the URL " + ("\"" + pathname + search + hash + "\" because it does not start with the ") + "basename, so the <Router> won't render anything.");
+    if (location == null) {
+      return null;
+    }
+    return (
+      /*#__PURE__*/React.createElement(NavigationContext.Provider, {
+        value: navigationContext
+      }, /*#__PURE__*/React.createElement(LocationContext.Provider, {
+        children: children,
+        value: {
+          location,
+          navigationType
+        }
+      }))
+    );
+  }
+  /**
+  * A container for a nested tree of <Route> elements that renders the branch
+  * that best matches the current location.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#routes
+  */
+  function Routes(_ref4) {
+    let {children, location} = _ref4;
+    return useRoutes(createRoutesFromChildren(children), location);
+  }
+  // /////////////////////////////////////////////////////////////////////////////
+  // UTILS
+  // /////////////////////////////////////////////////////////////////////////////
+  /**
+  * Creates a route config from a React "children" object, which is usually
+  * either a `<Route>` element or an array of them. Used internally by
+  * `<Routes>` to create a route config from its children.
+  *
+  * @see https://reactrouter.com/docs/en/v6/api#createroutesfromchildren
+  */
+  function createRoutesFromChildren(children) {
+    let routes = [];
+    React.Children.forEach(children, element => {
+      if (!/*#__PURE__*/React.isValidElement(element)) {
+        // Ignore non-elements. This allows people to more easily inline
+        // conditionals in their route config.
+        return;
+      }
+      if (element.type === React.Fragment) {
+        // Transparently support React.Fragment and its children.
+        routes.push.apply(routes, createRoutesFromChildren(element.props.children));
+        return;
+      }
+      !(element.type === Route) ? invariant(false, "[" + (typeof element.type === "string" ? element.type : element.type.name) + "] is not a <Route> component. All component children of <Routes> must be a <Route> or <React.Fragment>") : void 0;
+      let route = {
+        caseSensitive: element.props.caseSensitive,
+        element: element.props.element,
+        index: element.props.index,
+        path: element.props.path
+      };
+      if (element.props.children) {
+        route.children = createRoutesFromChildren(element.props.children);
+      }
+      routes.push(route);
+    });
+    return routes;
+  }
+  /**
+  * Renders the result of `matchRoutes()` into a React element.
+  */
+  function renderMatches(matches) {
+    return _renderMatches(matches);
+  }
+  Object.defineProperty(exports, 'NavigationType', {
+    enumerable: true,
+    get: function () {
+      return history.Action;
+    }
+  });
+  Object.defineProperty(exports, 'createPath', {
+    enumerable: true,
+    get: function () {
+      return history.createPath;
+    }
+  });
+  Object.defineProperty(exports, 'parsePath', {
+    enumerable: true,
+    get: function () {
+      return history.parsePath;
+    }
+  });
+  exports.MemoryRouter = MemoryRouter;
+  exports.Navigate = Navigate;
+  exports.Outlet = Outlet;
+  exports.Route = Route;
+  exports.Router = Router;
+  exports.Routes = Routes;
+  exports.UNSAFE_LocationContext = LocationContext;
+  exports.UNSAFE_NavigationContext = NavigationContext;
+  exports.UNSAFE_RouteContext = RouteContext;
+  exports.createRoutesFromChildren = createRoutesFromChildren;
+  exports.generatePath = generatePath;
+  exports.matchPath = matchPath;
+  exports.matchRoutes = matchRoutes;
+  exports.renderMatches = renderMatches;
+  exports.resolvePath = resolvePath;
+  exports.useHref = useHref;
+  exports.useInRouterContext = useInRouterContext;
+  exports.useLocation = useLocation;
+  exports.useMatch = useMatch;
+  exports.useNavigate = useNavigate;
+  exports.useNavigationType = useNavigationType;
+  exports.useOutlet = useOutlet;
+  exports.useOutletContext = useOutletContext;
+  exports.useParams = useParams;
+  exports.useResolvedPath = useResolvedPath;
+  exports.useRoutes = useRoutes;
+  Object.defineProperty(exports, '__esModule', {
+    value: true
+  });
+});
+
+},{"history":"3dARO","react":"3b2NM"}]},["1j6wU","3MZLv","5mCR7"], "5mCR7", "parcelRequireae5e")
 
 //# sourceMappingURL=index.ed731f93.js.map

@@ -1,0 +1,19 @@
+.airports-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  column-gap: 32px;
+}
+
+.container {
+  padding: 40px 88px;
+}
+
+button {
+  background-color: #e46846;
+  border-radius: 16px;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 20px;
+  padding: 4px 16px;
+}
