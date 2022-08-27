@@ -1,7 +1,14 @@
 import * as React from 'react'
 
 export const FlightImage: React.FC = () => (
-  <svg width='462' height='78' viewBox='0 0 462 78' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <svg
+    className='flightImage'
+    width='462'
+    height='78'
+    viewBox='0 0 462 78'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
     <path
       d='M20 63.0006C20 63.0006 117.5 16.3784 223.5 11.9145C329.5 7.4506 442 63.0006 442 63.0006'
       stroke='white'

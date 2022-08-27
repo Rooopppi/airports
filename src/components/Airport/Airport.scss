@@ -1,54 +1,73 @@
 .airport {
-    position: relative;
-    display: flex;
-    height: 390px;
-    overflow: hidden;
+  position: relative;
+  display: flex;
+  height: 390px;
+  overflow: hidden;
+  border-radius: 16px;
 
-    &:hover .content {
-        transform: translateY(0);
-    }
-}
+  &:hover .content {
+    transform: translateY(0);
+  }
 
-.image {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: var(--clr-bluish-grey);
-    opacity: 0.2;
-}
-
-.content {
+  .content {
     z-index: 1;
     width: 100%;
     margin-top: auto;
     padding: 24px 32px;
     color: var(--clr-white);
-    transform: translateY(100px);
+    transform: translateY(130px);
     transition: transform 0.3s;
+  }
+}
+
+.image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--clr-bluish-grey);
+  opacity: 0.2;
 }
 
 .basicInfo {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 
-    h2 {
-        font-size: 32px;
-        font-weight: 700;
-    }
+  h2 {
+    font-size: 32px;
+    font-weight: 700;
+  }
 
-    p {
-        font-size: 24px;
-        font-weight: 600;
-    }
+  p {
+    font-size: 24px;
+    font-weight: 600;
+  }
+}
+
+.button-start-from {
+  margin-right: 12px;
+}
+
+.direct-connections {
+  display: flex;
+  margin-bottom: 16px;
+  font-size: 20px;
+}
+
+.direct-connection {
+  padding: 0 8px;
+  border-right: solid 2px #fff;
+  &:first-child {
+    padding-left: 0;
+  }
 }

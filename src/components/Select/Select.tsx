@@ -1,4 +1,5 @@
 import * as React from 'react'
+import './Select.scss'
 
 interface SelectProps {
   label: string
@@ -7,15 +8,17 @@ interface SelectProps {
 
 export const Select: React.FC<SelectProps> = ({ label, options }) => {
   return (
-    <label>
-      {label}
-      <select>
-        {options.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-    </label>
+    <div className='select-airport'>
+      <label>
+        {label}
+        <select>
+          {options.map((option) => (
+            <option className='airport-option' key={option} value={option}>
+              {option}
+            </option>
+          ))}
+        </select>
+      </label>
+    </div>
   )
 }

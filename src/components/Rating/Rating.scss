@@ -1,7 +1,28 @@
 .rating {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    color: var(--clr-white);
-    font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--clr-white);
+  font-weight: 700;
+}
+
+svg {
+  fill: gold;
+}
+
+.stars {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  background-color: #fff;
+}
+
+.cover {
+  background-color: black;
+  mix-blend-mode: color;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
 }

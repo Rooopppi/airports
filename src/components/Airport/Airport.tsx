@@ -8,9 +8,16 @@ interface AirportProps {
   name: string
   country: string
   rating: number
+  directConnections: Array<string>
 }
 
-export const Airport: React.FC<AirportProps> = ({ imageSrc, name, country, rating }) => {
+export const Airport: React.FC<AirportProps> = ({
+  imageSrc,
+  name,
+  country,
+  rating,
+  directConnections,
+}) => {
   return (
     <div className='airport'>
       <img className='image' src={imageSrc} />
@@ -24,7 +31,16 @@ export const Airport: React.FC<AirportProps> = ({ imageSrc, name, country, ratin
           <Rating rating={rating} />
         </div>
         <p>Direct connections</p>
-        <button>Start from</button>
+        <div className='direct-connections'>
+          {directConnections.map((connection) => {
+            return (
+              <div className='direct-connection' key={connection}>
+                {connection}
+              </div>
+            )
+          })}
+        </div>
+        <button className='button-start-from'>Start from</button>
         <button>Go to</button>
       </div>
     </div>

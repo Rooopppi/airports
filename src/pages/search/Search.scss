@@ -1,4 +1,5 @@
-.background {
+.search-page {
+  .background {
     position: fixed;
     top: 0;
     left: 0;
@@ -6,51 +7,54 @@
     z-index: -1;
 
     img {
-        width: 50%;
-        height: 100vh;
-        object-fit: cover;
+      width: 50%;
+      height: 100vh;
+      object-fit: cover;
     }
-}
+  }
 
-.content {
+  .content {
     padding: 0 104px;
     align-items: center;
     display: flex;
     flex-direction: column;
     margin-top: 130px;
-}
+    font-size: 24px;
+  }
 
-.banner {
-    background: var(--clr-white);
-    border-radius: 16px;
-    padding: 24px;
-    width: 100%;
+  .from-to-points {
     display: flex;
     justify-content: space-between;
-}
+    margin-bottom: 178px;
+    color: #fff;
+  }
 
-.travel {
-    width: 50%;
-    display: flex;
-    justify-content: space-between;
+  .from-point-title,
+  .to-point-title {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 24px;
+  }
 
-    .layovers {
-        display: flex;
-
-        span {
-            display: flex;
-            flex-direction: column;
-            &::before {
-                content: '';
-                width: 12px;
-                height: 12px;
-                border-radius: 50%;
-                border: 1px solid;
-            }
-        }
+  .flightImage {
+    padding: 0 44px;
+  }
+  .button-back {
+    background-color: transparent;
+    font-size: 20px;
+    position: relative;
+    top: 44px;
+    left: 80px;
+    &::before {
+      content: '';
+      background-image: url('../../assets/arrow-back.png');
+      background-repeat: no-repeat;
+      display: inline-block;
+      width: 30px;
+      height: 11px;
     }
-}
-
-.separator {
-    border-top: 1px dotted;
+    a {
+      color: #fff;
+    }
+  }
 }
