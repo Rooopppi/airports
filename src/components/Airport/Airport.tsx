@@ -8,7 +8,7 @@ interface AirportProps {
   name: string
   country: string
   rating: number
-  directConnections: Array<string>
+  directConnections?: Array<string>
 }
 
 export const Airport: React.FC<AirportProps> = ({
@@ -18,27 +18,47 @@ export const Airport: React.FC<AirportProps> = ({
   rating,
   directConnections,
 }) => {
+  const [directConnectionsReduced, setDirectConnectionsReduced] = React.useState<Array<string>>([])
+  const [directConnectionsExtra, setDirectConnectionsExtra] = React.useState(0)
+
+  React.useEffect(() => {
+    if (!directConnections) {
+      return
+    }
+    if (directConnections.length > 11) {
+      setDirectConnectionsReduced(directConnections.slice(0, 11))
+      setDirectConnectionsExtra(directConnections.length - 11)
+    } else {
+      setDirectConnectionsReduced(directConnections)
+    }
+  }, [directConnections])
+
   return (
     <div className='airport'>
       <img className='image' src={imageSrc} />
       <div className='overlay' />
       <div className='content'>
         <div className='basicInfo'>
-          <span>
-            <h2>{country}</h2>
-            <p>{name}</p>
-          </span>
-          <Rating rating={rating} />
+          <div className='info-wrapper'>
+            <div>
+              <h2>{country}</h2>
+            </div>
+            <Rating rating={rating} />
+          </div>
+          <div className='airport-name'>{name}</div>
         </div>
         <p>Direct connections</p>
         <div className='direct-connections'>
-          {directConnections.map((connection) => {
+          {directConnectionsReduced.map((connection) => {
             return (
               <div className='direct-connection' key={connection}>
                 {connection}
               </div>
             )
           })}
+          {directConnectionsExtra ? (
+            <span className='extra-connections'>+ {directConnectionsExtra} more</span>
+          ) : null}
         </div>
         <button className='button-start-from'>Start from</button>
         <button>Go to</button>
