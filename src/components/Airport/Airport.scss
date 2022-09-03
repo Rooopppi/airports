@@ -1,7 +1,7 @@
 .airport {
   position: relative;
   display: flex;
-  height: 390px;
+  min-height: 390px;
   overflow: hidden;
   border-radius: 16px;
 
@@ -12,11 +12,15 @@
   .content {
     z-index: 1;
     width: 100%;
-    margin-top: auto;
     padding: 24px 32px;
     color: var(--clr-white);
-    transform: translateY(130px);
+    margin-top: auto;
+    transform: translateY(150px);
     transition: transform 0.3s;
+  }
+
+  .airport-name {
+    font-size: 24px;
   }
 }
 
@@ -42,7 +46,13 @@
 .basicInfo {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
+  margin-bottom: 35px;
 
+  .info-wrapper {
+    display: flex;
+    justify-content: space-between;
+  }
   h2 {
     font-size: 32px;
     font-weight: 700;
@@ -60,14 +70,21 @@
 
 .direct-connections {
   display: flex;
-  margin-bottom: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 5px;
   font-size: 20px;
 }
 
 .direct-connection {
   padding: 0 8px;
+  margin-bottom: 5px;
   border-right: solid 2px #fff;
-  &:first-child {
+  &:first-child,
+  &:nth-child(8n) {
     padding-left: 0;
   }
+}
+
+.extra-connections {
+  margin-left: 5px;
 }

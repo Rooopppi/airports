@@ -14,8 +14,50 @@ select {
   background-position-x: 100%;
 }
 
-option {
-  padding: 20px;
-  border-radius: 20px;
-  border: solid 1px black;
+.selected-option,
+.option {
+  background-color: transparent;
+  border: none;
+  color: #000;
+  min-width: 300px;
+  text-align: left;
+  padding: 16px 0;
+  font-size: 16px;
+}
+
+.option {
+  &::before {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    background-image: url('../../assets/pin_drop_24px.png');
+    background-repeat: no-repeat;
+    width: 20px;
+    height: 20px;
+    left: 4%;
+  }
+}
+
+.from-dropdown,
+.to-dropdown {
+  overflow: auto;
+  height: 200px;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  z-index: 2;
+  top: 20%;
+  width: 330px;
+  border: 1px solid #e5e5e5;
+  box-shadow: 0px 6px 12px rgba(71, 67, 78, 0.08);
+  border-radius: 16px;
+  padding: 20px 20px 20px 40px;
+}
+
+.to-dropdown {
+  right: 30%;
+}
+.from-dropdown {
+  left: 26%;
 }

@@ -1,14 +1,14 @@
-import * as React from 'react'
-import './Banner.scss'
+import * as React from 'react';
+import './Banner.scss';
 
 interface BannerProps {
-  from: string
-  to: string
-  layovers: string[]
+  from: string;
+  to: string;
+  layovers: string[];
 }
 
 export const Banner: React.FC<BannerProps> = ({ from, to, layovers }) => {
-  const changesCount = layovers.length
+  const changesCount = layovers.length;
 
   return (
     <div className='banner'>
@@ -17,10 +17,12 @@ export const Banner: React.FC<BannerProps> = ({ from, to, layovers }) => {
         <div className='layovers'>
           <span className='layover-first'></span>
           <div className='separator' />
-          {layovers.map((layover) => (
+          {layovers.map((layover, index) => (
             <>
-              <span className='layover'>{layover}</span>
-              <div className='separator' />
+              <div key={layover} className='layover'>
+                {layover}
+              </div>
+              <div key={index} className='separator' />
             </>
           ))}
           <span className='layover-last'></span>
@@ -32,5 +34,5 @@ export const Banner: React.FC<BannerProps> = ({ from, to, layovers }) => {
         <button className='button-go'>Go!</button>
       </div>
     </div>
-  )
-}
+  );
+};
