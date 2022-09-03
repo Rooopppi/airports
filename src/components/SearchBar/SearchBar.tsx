@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { Select } from '../Select'
-import { getAirportsNames, addToPoint, addFromPoint } from '../../slices/flightSlice'
+import { getAirportsNames, addToPoint, addFromPoint } from '../../redux/slices/flightSlice'
 import { useAppSelector } from '../../hooks'
+import { Link } from 'react-router-dom'
 
 import './SearchBar.scss'
 
@@ -26,7 +27,9 @@ export const SearchBar: React.FC = () => {
         label='To'
         options={airportsNames}
       />
-      <button className='button-search'></button>
+      <Link to='/search'>
+        <button className='button-search'></button>
+      </Link>
     </div>
   )
 }

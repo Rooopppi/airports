@@ -1,7 +1,8 @@
 import * as React from 'react'
-
 import './Airport.scss'
 import { Rating } from '../Rating'
+import { useAppDispatch } from '../../hooks'
+import { addToPoint, addFromPoint } from '../../redux/slices/flightSlice'
 
 interface AirportProps {
   imageSrc: string
@@ -20,6 +21,8 @@ export const Airport: React.FC<AirportProps> = ({
 }) => {
   const [directConnectionsReduced, setDirectConnectionsReduced] = React.useState<Array<string>>([])
   const [directConnectionsExtra, setDirectConnectionsExtra] = React.useState(0)
+
+  const dispatch = useAppDispatch()
 
   React.useEffect(() => {
     if (!directConnections) {
@@ -60,8 +63,10 @@ export const Airport: React.FC<AirportProps> = ({
             <span className='extra-connections'>+ {directConnectionsExtra} more</span>
           ) : null}
         </div>
-        <button className='button-start-from'>Start from</button>
-        <button>Go to</button>
+        <button onClick={() => dispatch(addFromPoint(name))} className='button-start-from'>
+          Start from
+        </button>
+        <button onClick={() => dispatch(addToPoint(name))}>Go to</button>
       </div>
     </div>
   )

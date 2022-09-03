@@ -32196,116 +32196,7 @@ Object.keys(_Rating).forEach(function (key) {
     }
   });
 });
-},{"./Rating":"src/components/Rating/Rating.tsx"}],"src/components/Airport/Airport.tsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Airport = void 0;
-
-var React = _interopRequireWildcard(require("react"));
-
-require("./Airport.scss");
-
-var _Rating = require("../Rating");
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-var __read = void 0 && (void 0).__read || function (o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m) return o;
-  var i = m.call(o),
-      r,
-      ar = [],
-      e;
-
-  try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
-      ar.push(r.value);
-    }
-  } catch (error) {
-    e = {
-      error: error
-    };
-  } finally {
-    try {
-      if (r && !r.done && (m = i["return"])) m.call(i);
-    } finally {
-      if (e) throw e.error;
-    }
-  }
-
-  return ar;
-};
-
-var Airport = function Airport(_a) {
-  var imageSrc = _a.imageSrc,
-      name = _a.name,
-      country = _a.country,
-      rating = _a.rating,
-      directConnections = _a.directConnections;
-
-  var _b = __read(React.useState([]), 2),
-      directConnectionsReduced = _b[0],
-      setDirectConnectionsReduced = _b[1];
-
-  var _c = __read(React.useState(0), 2),
-      directConnectionsExtra = _c[0],
-      setDirectConnectionsExtra = _c[1];
-
-  React.useEffect(function () {
-    if (!directConnections) {
-      return;
-    }
-
-    if (directConnections.length > 11) {
-      setDirectConnectionsReduced(directConnections.slice(0, 11));
-      setDirectConnectionsExtra(directConnections.length - 11);
-    } else {
-      setDirectConnectionsReduced(directConnections);
-    }
-  }, [directConnections]);
-  return React.createElement("div", {
-    className: 'airport'
-  }, React.createElement("img", {
-    className: 'image',
-    src: imageSrc
-  }), React.createElement("div", {
-    className: 'overlay'
-  }), React.createElement("div", {
-    className: 'content'
-  }, React.createElement("div", {
-    className: 'basicInfo'
-  }, React.createElement("div", {
-    className: 'info-wrapper'
-  }, React.createElement("div", null, React.createElement("h2", null, country)), React.createElement(_Rating.Rating, {
-    rating: rating
-  })), React.createElement("div", {
-    className: 'airport-name'
-  }, name)), React.createElement("p", null, "Direct connections"), React.createElement("div", {
-    className: 'direct-connections'
-  }, directConnectionsReduced.map(function (connection) {
-    return React.createElement("div", {
-      className: 'direct-connection',
-      key: connection
-    }, connection);
-  }), directConnectionsExtra ? React.createElement("span", {
-    className: 'extra-connections'
-  }, "+ ", directConnectionsExtra, " more") : null), React.createElement("button", {
-    className: 'button-start-from'
-  }, "Start from"), React.createElement("button", null, "Go to")));
-};
-
-exports.Airport = Airport;
-},{"react":"node_modules/react/index.js","./Airport.scss":"src/components/Airport/Airport.scss","../Rating":"src/components/Rating/index.ts"}],"src/components/Select/Select.scss":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"./..\\..\\assets\\arrow.png":[["arrow.7bb11739.png","src/assets/arrow.png"],"src/assets/arrow.png"],"./..\\..\\assets\\pin_drop_24px.png":[["pin_drop_24px.82db6140.png","src/assets/pin_drop_24px.png"],"src/assets/pin_drop_24px.png"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.development.js":[function(require,module,exports) {
+},{"./Rating":"src/components/Rating/Rating.tsx"}],"node_modules/use-sync-external-store/cjs/use-sync-external-store-shim.development.js":[function(require,module,exports) {
 /**
  * @license React
  * use-sync-external-store-shim.development.js
@@ -34844,113 +34735,7 @@ var useAppDispatch = _reactRedux.useDispatch;
 exports.useAppDispatch = useAppDispatch;
 var useAppSelector = _reactRedux.useSelector;
 exports.useAppSelector = useAppSelector;
-},{"react-redux":"node_modules/react-redux/es/index.js"}],"src/components/Select/Select.tsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.Select = void 0;
-
-var React = _interopRequireWildcard(require("react"));
-
-require("./Select.scss");
-
-var _hooks = require("../../hooks");
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-var __read = void 0 && (void 0).__read || function (o, n) {
-  var m = typeof Symbol === "function" && o[Symbol.iterator];
-  if (!m) return o;
-  var i = m.call(o),
-      r,
-      ar = [],
-      e;
-
-  try {
-    while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
-      ar.push(r.value);
-    }
-  } catch (error) {
-    e = {
-      error: error
-    };
-  } finally {
-    try {
-      if (r && !r.done && (m = i["return"])) m.call(i);
-    } finally {
-      if (e) throw e.error;
-    }
-  }
-
-  return ar;
-};
-
-var Select = function Select(_a) {
-  var label = _a.label,
-      options = _a.options,
-      dropdownName = _a.dropdownName,
-      selectedOption = _a.selectedOption,
-      addSelectedPoint = _a.addSelectedPoint;
-
-  var _b = __read(React.useState(false), 2),
-      isOptionsOpen = _b[0],
-      setIsOptionsOpen = _b[1];
-
-  var dispatch = (0, _hooks.useAppDispatch)();
-
-  var toggleOptions = function toggleOptions() {
-    setIsOptionsOpen(!isOptionsOpen);
-  };
-
-  var setOption = function setOption(option) {
-    dispatch(addSelectedPoint(option));
-    setIsOptionsOpen(false);
-  };
-
-  return React.createElement("div", {
-    className: 'select-airport'
-  }, React.createElement("label", null, label), React.createElement("button", {
-    className: 'selected-option',
-    onClick: toggleOptions
-  }, selectedOption), isOptionsOpen && React.createElement("div", {
-    className: dropdownName
-  }, options.map(function (option) {
-    return React.createElement("button", {
-      className: 'option',
-      onClick: function onClick(e) {
-        e.preventDefault();
-        setOption(option);
-      },
-      key: option
-    }, option);
-  })));
-};
-
-exports.Select = Select;
-},{"react":"node_modules/react/index.js","./Select.scss":"src/components/Select/Select.scss","../../hooks":"src/hooks.ts"}],"src/components/Select/index.ts":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-
-var _Select = require("./Select");
-
-Object.keys(_Select).forEach(function (key) {
-  if (key === "default" || key === "__esModule") return;
-  if (key in exports && exports[key] === _Select[key]) return;
-  Object.defineProperty(exports, key, {
-    enumerable: true,
-    get: function () {
-      return _Select[key];
-    }
-  });
-});
-},{"./Select":"src/components/Select/Select.tsx"}],"node_modules/immer/dist/immer.esm.js":[function(require,module,exports) {
+},{"react-redux":"node_modules/react-redux/es/index.js"}],"node_modules/immer/dist/immer.esm.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -40095,13 +39880,13 @@ function createListenerMiddleware(middlewareOptions) {
 
 
 (0, _immer.enableES5)();
-},{"immer":"node_modules/immer/dist/immer.esm.js","redux":"node_modules/redux/es/redux.js","reselect":"node_modules/reselect/es/index.js","redux-thunk":"node_modules/redux-thunk/es/index.js","process":"node_modules/process/browser.js"}],"src/slices/flightSlice.ts":[function(require,module,exports) {
+},{"immer":"node_modules/immer/dist/immer.esm.js","redux":"node_modules/redux/es/redux.js","reselect":"node_modules/reselect/es/index.js","redux-thunk":"node_modules/redux-thunk/es/index.js","process":"node_modules/process/browser.js"}],"src/redux/slices/flightSlice.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = exports.getExtendedAirports = exports.getAirportsNames = exports.addToPoint = exports.addFromPoint = exports.addConnections = exports.addAirports = exports.flightSlice = void 0;
+exports.default = exports.getPossibleConnections = exports.getAirportByName = exports.getExtendedAirports = exports.getAirportsNames = exports.addToPoint = exports.addFromPoint = exports.addConnections = exports.addAirports = exports.flightSlice = void 0;
 
 var _toolkit = require("@reduxjs/toolkit");
 
@@ -40156,13 +39941,30 @@ var __spreadArray = void 0 && (void 0).__spreadArray || function (to, from) {
   return to;
 };
 
+var __values = void 0 && (void 0).__values || function (o) {
+  var s = typeof Symbol === "function" && Symbol.iterator,
+      m = s && o[s],
+      i = 0;
+  if (m) return m.call(o);
+  if (o && typeof o.length === "number") return {
+    next: function next() {
+      if (o && i >= o.length) o = void 0;
+      return {
+        value: o && o[i++],
+        done: !o
+      };
+    }
+  };
+  throw new TypeError(s ? "Object is not iterable." : "Symbol.iterator is not defined.");
+};
+
 var _a;
 
 var initialState = {
-  airportsData: [],
-  connectionsData: {},
-  fromPoint: '-',
-  toPoint: '-'
+  airportsData: JSON.parse(localStorage.getItem('airportsData') || '[]'),
+  connectionsData: JSON.parse(localStorage.getItem('connectionsData') || '{}'),
+  fromPoint: JSON.parse(localStorage.getItem('fromPoint') || 'null') || '-',
+  toPoint: JSON.parse(localStorage.getItem('toPoint') || 'null') || '-'
 };
 var flightSlice = (0, _toolkit.createSlice)({
   name: 'flights',
@@ -40170,15 +39972,19 @@ var flightSlice = (0, _toolkit.createSlice)({
   reducers: {
     addAirports: function addAirports(state, action) {
       state.airportsData = action.payload;
+      localStorage.setItem('airportsData', JSON.stringify(action.payload));
     },
     addConnections: function addConnections(state, action) {
       state.connectionsData = action.payload;
+      localStorage.setItem('connectionsData', JSON.stringify(action.payload));
     },
     addFromPoint: function addFromPoint(state, action) {
       state.fromPoint = action.payload;
+      localStorage.setItem('fromPoint', JSON.stringify(action.payload));
     },
     addToPoint: function addToPoint(state, action) {
       state.toPoint = action.payload;
+      localStorage.setItem('toPoint', JSON.stringify(action.payload));
     }
   }
 });
@@ -40227,9 +40033,375 @@ var getExtendedAirports = function getExtendedAirports(airports, connections) {
 };
 
 exports.getExtendedAirports = getExtendedAirports;
+
+var getAirportByName = function getAirportByName(state, airportName) {
+  var airport = state.flights.airportsData.find(function (airport) {
+    return airport.name === airportName;
+  }) || {
+    name: 'default',
+    code: 'default',
+    country: 'default',
+    connectionsArrayry: 'default',
+    id: 111,
+    images: {
+      thumb: 'default',
+      small: 'default',
+      full: 'default'
+    },
+    averageRating: 111
+  };
+  return airport;
+}; // export const getPossibleConnections = (
+//   state: RootState,
+//   fromAirportId: number,
+//   toAirportId: number,
+// ): void => {
+//   const { connectionsData } = state.flights;
+//   const queue = [fromAirportId.toString()];
+//   const visited = new Set();
+//   const possibleConnections = [];
+//   while (queue.length > 0) {
+//     const airportId = queue.shift();
+//     if (!airportId) {
+//       return;
+//     }
+//     const destinations = connectionsData[parseInt(airportId)];
+//     destinations.forEach((destination: string) => {
+//       if (destination === toAirportId.toString()) {
+//         console.log(fromAirportId, toAirportId, 'first');
+//       }
+//       if (!visited.has(destination)) {
+//         visited.add(destination);
+//         queue.push(destination);
+//         console.log(destination);
+//       }
+//     });
+//   }
+// };
+// const bfs = (start) => {
+//   const visited = new Set();
+//   const queue = [start];
+//   while (queue.length > 0) {
+//     const airport = queue.shift(); // mutates the queue
+//     const destinations = adjacencyList.get(airport);
+//     for (const destination of destinations) {
+//       if (destination === 'BKK') {
+//         console.log(`BFS found Bangkok!`);
+//       }
+//       if (!visited.has(destination)) {
+//         visited.add(destination);
+//         queue.push(destination);
+//       }
+//     }
+//   }
+// };
+// const searchConnections = (
+//   fromAirportId: number,
+//   visited = new Set(),
+//   connections: ConnectionData,
+//   toAirportId: number,
+// ): string[] | undefined => {
+//   visited.add(fromAirportId);
+//   const destinations = connections[fromAirportId];
+//   const connectionsArray = [];
+//   for (const destination of destinations) {
+//     connectionsArray.push(destination);
+//     if (destination === toAirportId.toString()) {
+//       console.log(connectionsArray);
+//       if (connectionsArray.length < 5) {
+//         return connectionsArray;
+//       }
+//       return;
+//     }
+//     if (!visited.has(destination)) {
+//       console.log(destination);
+//       visited.add(destination);
+//       searchConnections(parseInt(destination), visited, connections, toAirportId);
+//     }
+//   }
+// };
+
+
+exports.getAirportByName = getAirportByName;
+
+var getPossibleConnections = function getPossibleConnections(state, fromAirportId, toAirportId) {
+  var possibleConnections = [];
+  console.log(fromAirportId, toAirportId);
+  var connectionsData = state.flights.connectionsData;
+
+  var dfs = function dfs(fromAirportId, visited) {
+    var e_1, _a;
+
+    if (visited === void 0) {
+      visited = new Set();
+    }
+
+    visited.add(fromAirportId);
+    var destinations = connectionsData[fromAirportId];
+
+    try {
+      for (var destinations_1 = __values(destinations), destinations_1_1 = destinations_1.next(); !destinations_1_1.done; destinations_1_1 = destinations_1.next()) {
+        var destination = destinations_1_1.value;
+
+        if (destination === toAirportId.toString()) {
+          console.log('found');
+          return;
+        }
+
+        if (!visited.has(destination)) {
+          console.log(destination);
+          visited.add(destination);
+          dfs(parseInt(destination), visited);
+        }
+      }
+    } catch (e_1_1) {
+      e_1 = {
+        error: e_1_1
+      };
+    } finally {
+      try {
+        if (destinations_1_1 && !destinations_1_1.done && (_a = destinations_1.return)) _a.call(destinations_1);
+      } finally {
+        if (e_1) throw e_1.error;
+      }
+    }
+  };
+
+  dfs(fromAirportId);
+  console.log(possibleConnections);
+};
+
+exports.getPossibleConnections = getPossibleConnections;
 var _default = flightSlice.reducer;
 exports.default = _default;
-},{"@reduxjs/toolkit":"node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js"}],"src/components/SearchBar/SearchBar.scss":[function(require,module,exports) {
+},{"@reduxjs/toolkit":"node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js"}],"src/components/Airport/Airport.tsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Airport = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+require("./Airport.scss");
+
+var _Rating = require("../Rating");
+
+var _hooks = require("../../hooks");
+
+var _flightSlice = require("../../redux/slices/flightSlice");
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var __read = void 0 && (void 0).__read || function (o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m) return o;
+  var i = m.call(o),
+      r,
+      ar = [],
+      e;
+
+  try {
+    while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
+      ar.push(r.value);
+    }
+  } catch (error) {
+    e = {
+      error: error
+    };
+  } finally {
+    try {
+      if (r && !r.done && (m = i["return"])) m.call(i);
+    } finally {
+      if (e) throw e.error;
+    }
+  }
+
+  return ar;
+};
+
+var Airport = function Airport(_a) {
+  var imageSrc = _a.imageSrc,
+      name = _a.name,
+      country = _a.country,
+      rating = _a.rating,
+      directConnections = _a.directConnections;
+
+  var _b = __read(React.useState([]), 2),
+      directConnectionsReduced = _b[0],
+      setDirectConnectionsReduced = _b[1];
+
+  var _c = __read(React.useState(0), 2),
+      directConnectionsExtra = _c[0],
+      setDirectConnectionsExtra = _c[1];
+
+  var dispatch = (0, _hooks.useAppDispatch)();
+  React.useEffect(function () {
+    if (!directConnections) {
+      return;
+    }
+
+    if (directConnections.length > 11) {
+      setDirectConnectionsReduced(directConnections.slice(0, 11));
+      setDirectConnectionsExtra(directConnections.length - 11);
+    } else {
+      setDirectConnectionsReduced(directConnections);
+    }
+  }, [directConnections]);
+  return React.createElement("div", {
+    className: 'airport'
+  }, React.createElement("img", {
+    className: 'image',
+    src: imageSrc
+  }), React.createElement("div", {
+    className: 'overlay'
+  }), React.createElement("div", {
+    className: 'content'
+  }, React.createElement("div", {
+    className: 'basicInfo'
+  }, React.createElement("div", {
+    className: 'info-wrapper'
+  }, React.createElement("div", null, React.createElement("h2", null, country)), React.createElement(_Rating.Rating, {
+    rating: rating
+  })), React.createElement("div", {
+    className: 'airport-name'
+  }, name)), React.createElement("p", null, "Direct connections"), React.createElement("div", {
+    className: 'direct-connections'
+  }, directConnectionsReduced.map(function (connection) {
+    return React.createElement("div", {
+      className: 'direct-connection',
+      key: connection
+    }, connection);
+  }), directConnectionsExtra ? React.createElement("span", {
+    className: 'extra-connections'
+  }, "+ ", directConnectionsExtra, " more") : null), React.createElement("button", {
+    onClick: function onClick() {
+      return dispatch((0, _flightSlice.addFromPoint)(name));
+    },
+    className: 'button-start-from'
+  }, "Start from"), React.createElement("button", {
+    onClick: function onClick() {
+      return dispatch((0, _flightSlice.addToPoint)(name));
+    }
+  }, "Go to")));
+};
+
+exports.Airport = Airport;
+},{"react":"node_modules/react/index.js","./Airport.scss":"src/components/Airport/Airport.scss","../Rating":"src/components/Rating/index.ts","../../hooks":"src/hooks.ts","../../redux/slices/flightSlice":"src/redux/slices/flightSlice.ts"}],"src/components/Select/Select.scss":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"./..\\..\\assets\\arrow.png":[["arrow.7bb11739.png","src/assets/arrow.png"],"src/assets/arrow.png"],"./..\\..\\assets\\pin_drop_24px.png":[["pin_drop_24px.82db6140.png","src/assets/pin_drop_24px.png"],"src/assets/pin_drop_24px.png"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/components/Select/Select.tsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Select = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+require("./Select.scss");
+
+var _hooks = require("../../hooks");
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var __read = void 0 && (void 0).__read || function (o, n) {
+  var m = typeof Symbol === "function" && o[Symbol.iterator];
+  if (!m) return o;
+  var i = m.call(o),
+      r,
+      ar = [],
+      e;
+
+  try {
+    while ((n === void 0 || n-- > 0) && !(r = i.next()).done) {
+      ar.push(r.value);
+    }
+  } catch (error) {
+    e = {
+      error: error
+    };
+  } finally {
+    try {
+      if (r && !r.done && (m = i["return"])) m.call(i);
+    } finally {
+      if (e) throw e.error;
+    }
+  }
+
+  return ar;
+};
+
+var Select = function Select(_a) {
+  var label = _a.label,
+      options = _a.options,
+      dropdownName = _a.dropdownName,
+      selectedOption = _a.selectedOption,
+      addSelectedPoint = _a.addSelectedPoint;
+
+  var _b = __read(React.useState(false), 2),
+      isOptionsOpen = _b[0],
+      setIsOptionsOpen = _b[1];
+
+  var dispatch = (0, _hooks.useAppDispatch)();
+
+  var toggleOptions = function toggleOptions() {
+    setIsOptionsOpen(!isOptionsOpen);
+  };
+
+  var setOption = function setOption(option) {
+    dispatch(addSelectedPoint(option));
+    setIsOptionsOpen(false);
+  };
+
+  return React.createElement("div", {
+    className: 'select-airport'
+  }, React.createElement("label", null, label), React.createElement("button", {
+    className: 'selected-option',
+    onClick: toggleOptions
+  }, selectedOption), isOptionsOpen && React.createElement("div", {
+    className: dropdownName
+  }, options.map(function (option) {
+    return React.createElement("button", {
+      className: 'option',
+      onClick: function onClick(e) {
+        e.preventDefault();
+        setOption(option);
+      },
+      key: option
+    }, option);
+  })));
+};
+
+exports.Select = Select;
+},{"react":"node_modules/react/index.js","./Select.scss":"src/components/Select/Select.scss","../../hooks":"src/hooks.ts"}],"src/components/Select/index.ts":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _Select = require("./Select");
+
+Object.keys(_Select).forEach(function (key) {
+  if (key === "default" || key === "__esModule") return;
+  if (key in exports && exports[key] === _Select[key]) return;
+  Object.defineProperty(exports, key, {
+    enumerable: true,
+    get: function () {
+      return _Select[key];
+    }
+  });
+});
+},{"./Select":"src/components/Select/Select.tsx"}],"src/components/SearchBar/SearchBar.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
@@ -40246,9 +40418,11 @@ var React = _interopRequireWildcard(require("react"));
 
 var _Select = require("../Select");
 
-var _flightSlice = require("../../slices/flightSlice");
+var _flightSlice = require("../../redux/slices/flightSlice");
 
 var _hooks = require("../../hooks");
+
+var _reactRouterDom = require("react-router-dom");
 
 require("./SearchBar.scss");
 
@@ -40280,13 +40454,15 @@ var SearchBar = function SearchBar() {
     dropdownName: 'to-dropdown',
     label: 'To',
     options: airportsNames
-  }), React.createElement("button", {
+  }), React.createElement(_reactRouterDom.Link, {
+    to: '/search'
+  }, React.createElement("button", {
     className: 'button-search'
-  }));
+  })));
 };
 
 exports.SearchBar = SearchBar;
-},{"react":"node_modules/react/index.js","../Select":"src/components/Select/index.ts","../../slices/flightSlice":"src/slices/flightSlice.ts","../../hooks":"src/hooks.ts","./SearchBar.scss":"src/components/SearchBar/SearchBar.scss"}],"src/components/SearchBar/index.ts":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../Select":"src/components/Select/index.ts","../../redux/slices/flightSlice":"src/redux/slices/flightSlice.ts","../../hooks":"src/hooks.ts","react-router-dom":"node_modules/react-router-dom/index.js","./SearchBar.scss":"src/components/SearchBar/SearchBar.scss"}],"src/components/SearchBar/index.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44580,31 +44756,17 @@ var getConnections = function getConnections() {
 };
 
 exports.getConnections = getConnections;
-},{"./inst":"src/api/inst.ts"}],"src/pages/home/Home.tsx":[function(require,module,exports) {
+},{"./inst":"src/api/inst.ts"}],"src/redux/thunks/flightsThunks.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.Home = void 0;
-
-var React = _interopRequireWildcard(require("react"));
-
-var _Airport = require("../../components/Airport/Airport");
-
-var _SearchBar = require("../../components/SearchBar");
-
-require("./Home.scss");
+exports.getConnectionsThunked = exports.getAirportsThunked = void 0;
 
 var _flightsApi = require("../../api/flightsApi");
 
-var _hooks = require("../../hooks");
-
-var _flightSlice = require("../../slices/flightSlice");
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+var _flightSlice = require("../../redux/slices/flightSlice");
 
 var __assign = void 0 && (void 0).__assign || function () {
   __assign = Object.assign || function (t) {
@@ -44620,6 +44782,376 @@ var __assign = void 0 && (void 0).__assign || function () {
   };
 
   return __assign.apply(this, arguments);
+};
+
+var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
+};
+
+var getAirportsThunked = function getAirportsThunked() {
+  return function (dispatch) {
+    return __awaiter(void 0, void 0, Promise, function () {
+      var data;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , (0, _flightsApi.getAirports)()];
+
+          case 1:
+            data = _a.sent().data;
+            dispatch((0, _flightSlice.addAirports)(data));
+            return [2
+            /*return*/
+            , data];
+        }
+      });
+    });
+  };
+};
+
+exports.getAirportsThunked = getAirportsThunked;
+
+var getConnectionsThunked = function getConnectionsThunked() {
+  return function (dispatch) {
+    return __awaiter(void 0, void 0, Promise, function () {
+      var data, parsedConnections;
+      return __generator(this, function (_a) {
+        switch (_a.label) {
+          case 0:
+            return [4
+            /*yield*/
+            , (0, _flightsApi.getConnections)()];
+
+          case 1:
+            data = _a.sent().data;
+            parsedConnections = data.split('\n').reduce(function (acc, element) {
+              var _a;
+
+              var dataArray = element.split(':');
+              var key = dataArray[0];
+              var value = dataArray[1].slice(1).split(', ');
+              acc = __assign(__assign({}, acc), (_a = {}, _a[key] = value, _a));
+              return acc;
+            }, {});
+            dispatch((0, _flightSlice.addConnections)(parsedConnections));
+            return [2
+            /*return*/
+            , parsedConnections];
+        }
+      });
+    });
+  };
+};
+
+exports.getConnectionsThunked = getConnectionsThunked;
+},{"../../api/flightsApi":"src/api/flightsApi.ts","../../redux/slices/flightSlice":"src/redux/slices/flightSlice.ts"}],"src/pages/home/Home.tsx":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.Home = void 0;
+
+var React = _interopRequireWildcard(require("react"));
+
+var _Airport = require("../../components/Airport/Airport");
+
+var _SearchBar = require("../../components/SearchBar");
+
+require("./Home.scss");
+
+var _hooks = require("../../hooks");
+
+var _flightSlice = require("../../redux/slices/flightSlice");
+
+var _flightsThunks = require("../../redux/thunks/flightsThunks");
+
+function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
+
+function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
+
+var __awaiter = void 0 && (void 0).__awaiter || function (thisArg, _arguments, P, generator) {
+  function adopt(value) {
+    return value instanceof P ? value : new P(function (resolve) {
+      resolve(value);
+    });
+  }
+
+  return new (P || (P = Promise))(function (resolve, reject) {
+    function fulfilled(value) {
+      try {
+        step(generator.next(value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function rejected(value) {
+      try {
+        step(generator["throw"](value));
+      } catch (e) {
+        reject(e);
+      }
+    }
+
+    function step(result) {
+      result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected);
+    }
+
+    step((generator = generator.apply(thisArg, _arguments || [])).next());
+  });
+};
+
+var __generator = void 0 && (void 0).__generator || function (thisArg, body) {
+  var _ = {
+    label: 0,
+    sent: function sent() {
+      if (t[0] & 1) throw t[1];
+      return t[1];
+    },
+    trys: [],
+    ops: []
+  },
+      f,
+      y,
+      t,
+      g;
+  return g = {
+    next: verb(0),
+    "throw": verb(1),
+    "return": verb(2)
+  }, typeof Symbol === "function" && (g[Symbol.iterator] = function () {
+    return this;
+  }), g;
+
+  function verb(n) {
+    return function (v) {
+      return step([n, v]);
+    };
+  }
+
+  function step(op) {
+    if (f) throw new TypeError("Generator is already executing.");
+
+    while (_) {
+      try {
+        if (f = 1, y && (t = op[0] & 2 ? y["return"] : op[0] ? y["throw"] || ((t = y["return"]) && t.call(y), 0) : y.next) && !(t = t.call(y, op[1])).done) return t;
+        if (y = 0, t) op = [op[0] & 2, t.value];
+
+        switch (op[0]) {
+          case 0:
+          case 1:
+            t = op;
+            break;
+
+          case 4:
+            _.label++;
+            return {
+              value: op[1],
+              done: false
+            };
+
+          case 5:
+            _.label++;
+            y = op[1];
+            op = [0];
+            continue;
+
+          case 7:
+            op = _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+
+          default:
+            if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) {
+              _ = 0;
+              continue;
+            }
+
+            if (op[0] === 3 && (!t || op[1] > t[0] && op[1] < t[3])) {
+              _.label = op[1];
+              break;
+            }
+
+            if (op[0] === 6 && _.label < t[1]) {
+              _.label = t[1];
+              t = op;
+              break;
+            }
+
+            if (t && _.label < t[2]) {
+              _.label = t[2];
+
+              _.ops.push(op);
+
+              break;
+            }
+
+            if (t[2]) _.ops.pop();
+
+            _.trys.pop();
+
+            continue;
+        }
+
+        op = body.call(thisArg, _);
+      } catch (e) {
+        op = [6, e];
+        y = 0;
+      } finally {
+        f = t = 0;
+      }
+    }
+
+    if (op[0] & 5) throw op[1];
+    return {
+      value: op[0] ? op[1] : void 0,
+      done: true
+    };
+  }
 };
 
 var __read = void 0 && (void 0).__read || function (o, n) {
@@ -44665,23 +45197,39 @@ var Home = function Home() {
       setExtendedAirports = _c[1];
 
   React.useEffect(function () {
-    (0, _flightsApi.getAirports)().then(function (result) {
-      setAirports(result.data);
-      dispatch((0, _flightSlice.addAirports)(result.data));
-    });
-    (0, _flightsApi.getConnections)().then(function (result) {
-      var parsedConnections = result.data.split('\n').reduce(function (acc, element) {
-        var _a;
+    var fetchData = function fetchData() {
+      return __awaiter(void 0, void 0, void 0, function () {
+        var airports, connections;
+        return __generator(this, function (_a) {
+          switch (_a.label) {
+            case 0:
+              return [4
+              /*yield*/
+              , dispatch((0, _flightsThunks.getAirportsThunked)())];
 
-        var dataArray = element.split(':');
-        var key = dataArray[0];
-        var value = dataArray[1].slice(1).split(', ');
-        acc = __assign(__assign({}, acc), (_a = {}, _a[key] = value, _a));
-        return acc;
-      }, {});
-      setConnections(parsedConnections);
-      dispatch((0, _flightSlice.addConnections)(parsedConnections));
-    });
+            case 1:
+              airports = _a.sent();
+              setAirports(airports);
+              return [4
+              /*yield*/
+              , dispatch((0, _flightsThunks.getConnectionsThunked)())];
+
+            case 2:
+              connections = _a.sent();
+              setConnections(connections);
+              return [2
+              /*return*/
+              ];
+          }
+        });
+      });
+    };
+
+    try {
+      fetchData();
+    } catch (_a) {
+      console.log('ss');
+    }
   }, []);
   React.useMemo(function () {
     if (airports.length > 0 && Object.keys(connections).length > 0) {
@@ -44707,7 +45255,7 @@ var Home = function Home() {
 };
 
 exports.Home = Home;
-},{"react":"node_modules/react/index.js","../../components/Airport/Airport":"src/components/Airport/Airport.tsx","../../components/SearchBar":"src/components/SearchBar/index.ts","./Home.scss":"src/pages/home/Home.scss","../../api/flightsApi":"src/api/flightsApi.ts","../../hooks":"src/hooks.ts","../../slices/flightSlice":"src/slices/flightSlice.ts"}],"src/pages/home/index.ts":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../../components/Airport/Airport":"src/components/Airport/Airport.tsx","../../components/SearchBar":"src/components/SearchBar/index.ts","./Home.scss":"src/pages/home/Home.scss","../../hooks":"src/hooks.ts","../../redux/slices/flightSlice":"src/redux/slices/flightSlice.ts","../../redux/thunks/flightsThunks":"src/redux/thunks/flightsThunks.ts"}],"src/pages/home/index.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44764,10 +45312,12 @@ var Banner = function Banner(_a) {
     className: 'layover-first'
   }), React.createElement("div", {
     className: 'separator'
-  }), layovers.map(function (layover) {
-    return React.createElement(React.Fragment, null, React.createElement("span", {
+  }), layovers.map(function (layover, index) {
+    return React.createElement(React.Fragment, null, React.createElement("div", {
+      key: layover,
       className: 'layover'
     }, layover), React.createElement("div", {
+      key: index,
       className: 'separator'
     }));
   }), React.createElement("span", {
@@ -44784,50 +45334,14 @@ var Banner = function Banner(_a) {
 };
 
 exports.Banner = Banner;
-},{"react":"node_modules/react/index.js","./Banner.scss":"src/components/Banner/Banner.scss"}],"src/components/FlightImage/FlightImage.tsx":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.FlightImage = void 0;
-
-var React = _interopRequireWildcard(require("react"));
-
-function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
-
-function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
-
-var FlightImage = function FlightImage() {
-  return React.createElement("svg", {
-    className: 'flightImage',
-    width: '462',
-    height: '78',
-    viewBox: '0 0 462 78',
-    fill: 'none',
-    xmlns: 'http://www.w3.org/2000/svg'
-  }, React.createElement("path", {
-    d: 'M20 63.0006C20 63.0006 117.5 16.3784 223.5 11.9145C329.5 7.4506 442 63.0006 442 63.0006',
-    stroke: 'white'
-  }), React.createElement("path", {
-    d: 'M303.887 31.1289C304.358 31.2249 304.842 31.0651 305.186 30.7272L313.395 22.1837L320.58 23.6507C321.664 23.872 322.725 23.1769 322.955 22.0945C323.185 21.012 322.496 19.9595 321.412 19.7381L314.226 18.2711L310.181 7.2256C310.016 6.78366 309.625 6.44518 309.155 6.34915C308.24 6.16244 307.385 6.91327 307.471 7.85613L308.348 17.0708L301.163 15.6038L299.898 12.8962C299.816 12.7026 299.64 12.5713 299.431 12.5286L298.66 12.3713C298.229 12.2832 297.827 12.6366 297.856 13.0779L298.134 17.0266L296.27 20.5379C296.064 20.9313 296.289 21.4126 296.72 21.5006L297.49 21.658C297.699 21.7007 297.915 21.6494 298.068 21.5039L300.331 19.5164L307.516 20.9834L302.958 29.0885C302.495 29.9193 302.973 30.9422 303.887 31.1289Z',
-    fill: 'white'
-  }), React.createElement("path", {
-    d: 'M11 72.0011C11 74.7612 8.76171 76.9993 6 76.9993C3.23829 76.9993 1 74.7612 1 72.0011C1 69.241 3.23829 67.0029 6 67.0029C8.76171 67.0029 11 69.241 11 72.0011Z',
-    stroke: 'white'
-  }), React.createElement("path", {
-    d: 'M461 72.0011C461 74.7612 458.762 76.9993 456 76.9993C453.238 76.9993 451 74.7612 451 72.0011C451 69.241 453.238 67.0029 456 67.0029C458.762 67.0029 461 69.241 461 72.0011Z',
-    stroke: 'white'
-  }));
-};
-
-exports.FlightImage = FlightImage;
-},{"react":"node_modules/react/index.js"}],"src/pages/search/Search.scss":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","./Banner.scss":"src/components/Banner/Banner.scss"}],"src/pages/search/Search.scss":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"./..\\..\\assets\\arrow-back.png":[["arrow-back.14db7fe9.png","src/assets/arrow-back.png"],"src/assets/arrow-back.png"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/pages/search/Search.tsx":[function(require,module,exports) {
+},{"./..\\..\\assets\\arrow-back.png":[["arrow-back.14db7fe9.png","src/assets/arrow-back.png"],"src/assets/arrow-back.png"],"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"src/assets/flight.png":[function(require,module,exports) {
+module.exports = "/flight.793fadbc.png";
+},{}],"src/pages/search/Search.tsx":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44839,17 +45353,38 @@ var React = _interopRequireWildcard(require("react"));
 
 var _Banner = require("../../components/Banner/Banner");
 
-var _FlightImage = require("../../components/FlightImage/FlightImage");
-
 var _reactRouterDom = require("react-router-dom");
 
+var _hooks = require("../../hooks");
+
+var _flightSlice = require("../../redux/slices/flightSlice");
+
 require("./Search.scss");
+
+var _flight = _interopRequireDefault(require("../../assets/flight.png"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _getRequireWildcardCache(nodeInterop) { if (typeof WeakMap !== "function") return null; var cacheBabelInterop = new WeakMap(); var cacheNodeInterop = new WeakMap(); return (_getRequireWildcardCache = function (nodeInterop) { return nodeInterop ? cacheNodeInterop : cacheBabelInterop; })(nodeInterop); }
 
 function _interopRequireWildcard(obj, nodeInterop) { if (!nodeInterop && obj && obj.__esModule) { return obj; } if (obj === null || typeof obj !== "object" && typeof obj !== "function") { return { default: obj }; } var cache = _getRequireWildcardCache(nodeInterop); if (cache && cache.has(obj)) { return cache.get(obj); } var newObj = {}; var hasPropertyDescriptor = Object.defineProperty && Object.getOwnPropertyDescriptor; for (var key in obj) { if (key !== "default" && Object.prototype.hasOwnProperty.call(obj, key)) { var desc = hasPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : null; if (desc && (desc.get || desc.set)) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } newObj.default = obj; if (cache) { cache.set(obj, newObj); } return newObj; }
 
 var Search = function Search() {
+  var fromPoint = (0, _hooks.useAppSelector)(function (state) {
+    return state.flights.fromPoint;
+  });
+  var toPoint = (0, _hooks.useAppSelector)(function (state) {
+    return state.flights.toPoint;
+  });
+  var fromAirport = (0, _hooks.useAppSelector)(function (state) {
+    return (0, _flightSlice.getAirportByName)(state, fromPoint);
+  });
+  var toAirport = (0, _hooks.useAppSelector)(function (state) {
+    return (0, _flightSlice.getAirportByName)(state, toPoint);
+  });
+  var connections = (0, _hooks.useAppSelector)(function (state) {
+    return (0, _flightSlice.getPossibleConnections)(state, fromAirport.id, toAirport.id);
+  });
   return React.createElement("div", {
     className: 'search-page'
   }, React.createElement("button", {
@@ -44859,9 +45394,9 @@ var Search = function Search() {
   }, "Back")), React.createElement("div", {
     className: 'background'
   }, React.createElement("img", {
-    src: 'http://centra-flights-api.herokuapp.com/images/full/dkr.jpg'
+    src: fromAirport.images.full
   }), React.createElement("img", {
-    src: 'http://centra-flights-api.herokuapp.com/images/full/ath.jpg'
+    src: toAirport.images.full
   })), React.createElement("div", {
     className: 'content'
   }, React.createElement("div", {
@@ -44870,11 +45405,14 @@ var Search = function Search() {
     className: 'from-point'
   }, React.createElement("div", {
     className: 'from-point-title'
-  }, "Warsaw"), React.createElement("div", null, "Warsaw Chopin Airport")), React.createElement(_FlightImage.FlightImage, null), React.createElement("div", {
+  }, fromAirport.country), React.createElement("div", null, fromAirport.name)), React.createElement("img", {
+    src: _flight.default,
+    className: 'flight-image'
+  }), React.createElement("div", {
     className: 'to-point'
   }, React.createElement("div", {
     className: 'to-point-title'
-  }, "Dubai"), React.createElement("div", null, "Dubai International Airport"))), React.createElement(_Banner.Banner, {
+  }, toAirport.country), React.createElement("div", null, toAirport.name))), React.createElement(_Banner.Banner, {
     from: 'WAW',
     to: 'DXB',
     layovers: ['AMS', 'CDG']
@@ -44882,7 +45420,7 @@ var Search = function Search() {
 };
 
 exports.Search = Search;
-},{"react":"node_modules/react/index.js","../../components/Banner/Banner":"src/components/Banner/Banner.tsx","../../components/FlightImage/FlightImage":"src/components/FlightImage/FlightImage.tsx","react-router-dom":"node_modules/react-router-dom/index.js","./Search.scss":"src/pages/search/Search.scss"}],"src/pages/search/index.ts":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","../../components/Banner/Banner":"src/components/Banner/Banner.tsx","react-router-dom":"node_modules/react-router-dom/index.js","../../hooks":"src/hooks.ts","../../redux/slices/flightSlice":"src/redux/slices/flightSlice.ts","./Search.scss":"src/pages/search/Search.scss","../../assets/flight.png":"src/assets/flight.png"}],"src/pages/search/index.ts":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -44970,7 +45508,7 @@ exports.setupStore = void 0;
 
 var _toolkit = require("@reduxjs/toolkit");
 
-var _flightSlice = _interopRequireDefault(require("./slices/flightSlice"));
+var _flightSlice = _interopRequireDefault(require("./redux/slices/flightSlice"));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -44986,7 +45524,7 @@ var setupStore = function setupStore(preloadedState) {
 };
 
 exports.setupStore = setupStore;
-},{"@reduxjs/toolkit":"node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js","./slices/flightSlice":"src/slices/flightSlice.ts"}],"src/index.tsx":[function(require,module,exports) {
+},{"@reduxjs/toolkit":"node_modules/@reduxjs/toolkit/dist/redux-toolkit.esm.js","./redux/slices/flightSlice":"src/redux/slices/flightSlice.ts"}],"src/index.tsx":[function(require,module,exports) {
 "use strict";
 
 var React = _interopRequireWildcard(require("react"));
@@ -45042,7 +45580,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64396" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65151" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

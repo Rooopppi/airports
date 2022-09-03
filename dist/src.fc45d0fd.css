@@ -256,11 +256,11 @@ button {
   width: 80%;
   font-size: 16px;
 }
-.travel .layovers span {
+.travel .layovers .layover {
   display: flex;
   flex-direction: column;
 }
-.travel .layovers span::before {
+.travel .layovers .layover::before {
   content: "";
   position: relative;
   margin: auto;
@@ -334,6 +334,11 @@ button {
 }
 .search-page .button-back a {
   color: #fff;
+}
+.search-page .flight-image {
+  width: 462px;
+  height: 77px;
+  transform: translateY(-25%);
 }
 :root {
   --clr-white: #ffffff;

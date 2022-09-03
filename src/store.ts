@@ -1,5 +1,5 @@
 import { combineReducers, configureStore, PreloadedState } from '@reduxjs/toolkit'
-import flightSliceReducer from './slices/flightSlice'
+import flightSliceReducer from './redux/slices/flightSlice'
 
 const rootReducer = combineReducers({
   flights: flightSliceReducer,

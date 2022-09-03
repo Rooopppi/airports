@@ -1,43 +1,40 @@
-import * as React from 'react'
-import { Airport } from '../../components/Airport/Airport'
-import { SearchBar } from '../../components/SearchBar'
-import './Home.scss'
-import { getAirports, getConnections } from '../../api/flightsApi'
-import { useAppDispatch } from '../../hooks'
-import { addAirports, addConnections, getExtendedAirports } from '../../slices/flightSlice'
-import AirportData from '../../interfaces/airport.type'
-import ConnectionData from '../../interfaces/connection.type'
+import * as React from 'react';
+import { Airport } from '../../components/Airport/Airport';
+import { SearchBar } from '../../components/SearchBar';
+import './Home.scss';
+import { getAirports, getConnections } from '../../api/flightsApi';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { addAirports, addConnections, getExtendedAirports } from '../../redux/slices/flightSlice';
+import AirportData from '../../interfaces/airport.type';
+import ConnectionData from '../../interfaces/connection.type';
+import { getAirportsThunked, getConnectionsThunked } from '../../redux/thunks/flightsThunks';
 
 export const Home: React.FC = () => {
-  const dispatch = useAppDispatch()
-  const [airports, setAirports] = React.useState<AirportData[]>([])
-  const [connections, setConnections] = React.useState<ConnectionData>({})
-  const [extendedAirports, setExtendedAirports] = React.useState<AirportData[]>([])
+  const dispatch = useAppDispatch();
+  const [airports, setAirports] = React.useState<AirportData[]>([]);
+  const [connections, setConnections] = React.useState<ConnectionData>({});
+  const [extendedAirports, setExtendedAirports] = React.useState<AirportData[]>([]);
 
   React.useEffect(() => {
-    getAirports().then((result) => {
-      setAirports(result.data)
-      dispatch(addAirports(result.data))
-    })
+    const fetchData = async () => {
+      const airports = await dispatch(getAirportsThunked());
+      setAirports(airports);
+      const connections = await dispatch(getConnectionsThunked());
+      setConnections(connections);
+    };
 
-    getConnections().then((result) => {
-      const parsedConnections = result.data.split('\n').reduce((acc, element) => {
-        const dataArray = element.split(':')
-        const key = dataArray[0]
-        const value = dataArray[1].slice(1).split(', ')
-        acc = { ...acc, [key]: value }
-        return acc
-      }, {})
-      setConnections(parsedConnections)
-      dispatch(addConnections(parsedConnections))
-    })
-  }, [])
+    try {
+      fetchData();
+    } catch {
+      console.log('ss');
+    }
+  }, []);
 
   React.useMemo(() => {
     if (airports.length > 0 && Object.keys(connections).length > 0) {
-      setExtendedAirports(getExtendedAirports(airports, connections))
+      setExtendedAirports(getExtendedAirports(airports, connections));
     }
-  }, [airports, connections])
+  }, [airports, connections]);
 
   return (
     <div className='container'>
@@ -54,9 +51,9 @@ export const Home: React.FC = () => {
                 directConnections={airport.directionCodes}
               />
             </div>
-          )
+          );
         })}
       </div>
     </div>
-  )
-}
+  );
+};
