@@ -90,118 +90,91 @@ export const getAirportByName = (state: RootState, airportName: string): Airport
   return airport;
 };
 
-// export const getPossibleConnections = (
-//   state: RootState,
-//   fromAirportId: number,
-//   toAirportId: number,
-// ): void => {
-//   const { connectionsData } = state.flights;
-//   const queue = [fromAirportId.toString()];
-//   const visited = new Set();
-//   const possibleConnections = [];
-
-//   while (queue.length > 0) {
-//     const airportId = queue.shift();
-
-//     if (!airportId) {
-//       return;
-//     }
-
-//     const destinations = connectionsData[parseInt(airportId)];
-//     destinations.forEach((destination: string) => {
-//       if (destination === toAirportId.toString()) {
-//         console.log(fromAirportId, toAirportId, 'first');
-//       }
-
-//       if (!visited.has(destination)) {
-//         visited.add(destination);
-//         queue.push(destination);
-//         console.log(destination);
-//       }
-//     });
-//   }
-// };
-
-// const bfs = (start) => {
-//   const visited = new Set();
-
-//   const queue = [start];
-
-//   while (queue.length > 0) {
-//     const airport = queue.shift(); // mutates the queue
-
-//     const destinations = adjacencyList.get(airport);
-
-//     for (const destination of destinations) {
-//       if (destination === 'BKK') {
-//         console.log(`BFS found Bangkok!`);
-//       }
-
-//       if (!visited.has(destination)) {
-//         visited.add(destination);
-//         queue.push(destination);
-//       }
-//     }
-//   }
-// };
-
-// const searchConnections = (
-//   fromAirportId: number,
-//   visited = new Set(),
-//   connections: ConnectionData,
-//   toAirportId: number,
-// ): string[] | undefined => {
-//   visited.add(fromAirportId);
-
-//   const destinations = connections[fromAirportId];
-//   const connectionsArray = [];
-//   for (const destination of destinations) {
-//     connectionsArray.push(destination);
-//     if (destination === toAirportId.toString()) {
-//       console.log(connectionsArray);
-
-//       if (connectionsArray.length < 5) {
-//         return connectionsArray;
-//       }
-//       return;
-//     }
-
-//     if (!visited.has(destination)) {
-//       console.log(destination);
-//       visited.add(destination);
-//       searchConnections(parseInt(destination), visited, connections, toAirportId);
-//     }
-//   }
-// };
-
-export const getPossibleConnections = (
-  state: RootState,
-  fromAirportId: number,
-  toAirportId: number,
-): void => {
-  const possibleConnections: string[][] = [];
-  console.log(fromAirportId, toAirportId);
+export function getPossiblePaths(state: RootState, start: string, destination: string): string[][] {
+  const possiblePaths: string[][] = [];
+  // console.log(start, destination);
   const { connectionsData } = state.flights;
+  const visited = new Set<string>();
 
-  const dfs = (fromAirportId: number, visited = new Set()) => {
-    visited.add(fromAirportId);
-    const destinations = connectionsData[fromAirportId];
-    for (const destination of destinations) {
-      if (destination === toAirportId.toString()) {
-        console.log('found');
+  const pathList: string[] = [];
+
+  // Call recursive utility
+  getAllPathsUtil(start, destination, visited, pathList, possiblePaths, connectionsData);
+  // console.log('possibleConnections', possiblePaths);
+  const possiblePathsCodes = getAirportConnectionsCodesById(state, possiblePaths);
+  return possiblePathsCodes;
+}
+
+// A recursive function to get
+// all paths from 'start' to 'destination'.
+// visited keeps track of nodes in current path.
+// localPathList<> stores actual nodes in the current path
+function getAllPathsUtil(
+  start: string,
+  destination: string,
+  visited: Set<string>,
+  localPathList: string[],
+  possiblePaths: string[][],
+  connectionsData: ConnectionData,
+) {
+  const connections = connectionsData[start];
+  if (start == destination) {
+    possiblePaths.push([...localPathList.slice(0, -1)]);
+    // if match found then no need to go deeper
+    return;
+  }
+
+  // Mark the current node
+  visited.add(start);
+
+  // Repeate for all the nodes
+  // adjacent to current node
+  for (const connection of connections) {
+    if (!visited.has(connection)) {
+      // return if localPathList has more than 4 paths in depth
+      if (localPathList.length > 4) {
         return;
       }
+      // store current node
+      // in path[]
+      localPathList.push(connection);
 
-      if (!visited.has(destination)) {
-        console.log(destination);
-        visited.add(destination);
-        dfs(parseInt(destination), visited);
-      }
+      getAllPathsUtil(
+        connection,
+        destination,
+        visited,
+        localPathList,
+        possiblePaths,
+        connectionsData,
+      );
+
+      // remove current node
+      // in path[] to go upper
+      localPathList.splice(localPathList.indexOf(connection), 1);
     }
-  };
+  }
 
-  dfs(fromAirportId);
-  console.log(possibleConnections);
+  // Delete the current node cos we found connection
+  // and we need to go upper
+  visited.delete(start);
+}
+
+const getAirportConnectionsCodesById = (
+  state: RootState,
+  possibleConnectionsId: string[][],
+): string[][] => {
+  const { airportsData } = state.flights;
+  const connectionsCodes = possibleConnectionsId.map((idArray: string[]) => {
+    return idArray.map((id: string) => {
+      const airport = airportsData.find((airport) => {
+        return airport.id.toString() === id;
+      });
+      return airport?.code || 'default';
+    });
+  });
+  // console.log('connectionsCodes', connectionsCodes);
+  const sortedConnectionsCodes = connectionsCodes.sort((a, b) => a.length - b.length);
+  return sortedConnectionsCodes;
 };
 
 export default flightSlice.reducer;

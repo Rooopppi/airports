@@ -29,6 +29,11 @@
     color: #fff;
   }
 
+  .to-point,
+  .from-point {
+    width: 100%;
+  }
+
   .from-point-title,
   .to-point-title {
     font-size: 40px;
@@ -62,5 +67,12 @@
     width: 462px;
     height: 77px;
     transform: translateY(-25%);
+  }
+
+  .no-connections {
+    display: block;
+    color: #e46846;
+    padding: 10px;
+    background-color: #fff;
   }
 }

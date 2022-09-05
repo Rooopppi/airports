@@ -20,6 +20,7 @@
     "dotenv": "^7.0.0",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-loader-spinner": "^5.3.3",
     "react-redux": "^8.0.2",
     "react-router-dom": "^6.3.0",
     "src": "^1.1.2",
@@ -27,6 +28,7 @@
   },
   "devDependencies": {
     "@microsoft/eslint-plugin-sdl": "^0.1.5",
+    "@parcel/transformer-image": "^2.0.0-beta.2",
     "@parcel/transformer-sass": "^2.0.0-beta.2",
     "@shopify/eslint-plugin": "^40.1.0",
     "@types/parcel-env": "0.0.0",

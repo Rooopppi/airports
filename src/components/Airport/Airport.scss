@@ -15,7 +15,7 @@
     padding: 24px 32px;
     color: var(--clr-white);
     margin-top: auto;
-    transform: translateY(150px);
+    transform: translateY(170px);
     transition: transform 0.3s;
   }
 
@@ -71,7 +71,7 @@
 .direct-connections {
   display: flex;
   flex-wrap: wrap;
-  margin-bottom: 5px;
+  margin-bottom: 20px;
   font-size: 20px;
 }
 
@@ -79,8 +79,7 @@
   padding: 0 8px;
   margin-bottom: 5px;
   border-right: solid 2px #fff;
-  &:first-child,
-  &:nth-child(8n) {
+  &:first-child {
     padding-left: 0;
   }
 }

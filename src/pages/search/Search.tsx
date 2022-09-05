@@ -2,9 +2,9 @@ import * as React from 'react';
 import { Banner } from '../../components/Banner/Banner';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../hooks';
-import { getAirportByName, getPossibleConnections } from '../../redux/slices/flightSlice';
+import { getAirportByName, getPossiblePaths } from '../../redux/slices/flightSlice';
 import './Search.scss';
-import FlightImg from '../../assets/flight.png';
+import FlightImg from 'url:../../assets/flight.png';
 
 export const Search: React.FC = () => {
   const fromPoint = useAppSelector((state) => state.flights.fromPoint);
@@ -13,7 +13,7 @@ export const Search: React.FC = () => {
   const toAirport = useAppSelector((state) => getAirportByName(state, toPoint));
 
   const connections = useAppSelector((state) =>
-    getPossibleConnections(state, fromAirport.id, toAirport.id),
+    getPossiblePaths(state, fromAirport.id.toString(), toAirport.id.toString()),
   );
 
   return (
@@ -37,7 +37,15 @@ export const Search: React.FC = () => {
             <div>{toAirport.name}</div>
           </div>
         </div>
-        <Banner from='WAW' to='DXB' layovers={['AMS', 'CDG']} />
+        {connections.length > 0 ? (
+          connections.map((connection, id) => {
+            return (
+              <Banner key={id} from={fromAirport.code} to={toAirport.code} layovers={connection} />
+            );
+          })
+        ) : (
+          <div className='no-connections'>No connections</div>
+        )}
       </div>
     </div>
   );
