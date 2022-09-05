@@ -28,9 +28,9 @@ export const Airport: React.FC<AirportProps> = ({
     if (!directConnections) {
       return
     }
-    if (directConnections.length > 11) {
-      setDirectConnectionsReduced(directConnections.slice(0, 11))
-      setDirectConnectionsExtra(directConnections.length - 11)
+    if (directConnections.length > 5) {
+      setDirectConnectionsReduced(directConnections.slice(0, 5))
+      setDirectConnectionsExtra(directConnections.length - 5)
     } else {
       setDirectConnectionsReduced(directConnections)
     }

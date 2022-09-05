@@ -1,15 +1,15 @@
-import * as React from 'react'
-import { Select } from '../Select'
-import { getAirportsNames, addToPoint, addFromPoint } from '../../redux/slices/flightSlice'
-import { useAppSelector } from '../../hooks'
-import { Link } from 'react-router-dom'
+import * as React from 'react';
+import { Select } from '../Select';
+import { getAirportsNames, addToPoint, addFromPoint } from '../../redux/slices/flightSlice';
+import { useAppSelector } from '../../hooks';
+import { Link } from 'react-router-dom';
 
-import './SearchBar.scss'
+import './SearchBar.scss';
 
 export const SearchBar: React.FC = () => {
-  const airportsNames = useAppSelector((state) => getAirportsNames(state))
-  const fromPoint = useAppSelector((state) => state.flights.fromPoint)
-  const toPoint = useAppSelector((state) => state.flights.toPoint)
+  const airportsNames = useAppSelector((state) => getAirportsNames(state));
+  const fromPoint = useAppSelector((state) => state.flights.fromPoint);
+  const toPoint = useAppSelector((state) => state.flights.toPoint);
 
   return (
     <div className='searchBar'>
@@ -28,8 +28,8 @@ export const SearchBar: React.FC = () => {
         options={airportsNames}
       />
       <Link to='/search'>
-        <button className='button-search'></button>
+        <button disabled={fromPoint === toPoint} className='button-search'></button>
       </Link>
     </div>
-  )
-}
+  );
+};

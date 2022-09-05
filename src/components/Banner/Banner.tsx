@@ -15,15 +15,12 @@ export const Banner: React.FC<BannerProps> = ({ from, to, layovers }) => {
       <div className='travel'>
         <span className='destination-title'>{from}</span>
         <div className='layovers'>
-          <span className='layover-first'></span>
-          <div className='separator' />
-          {layovers.map((layover, index) => (
-            <>
-              <div key={layover} className='layover'>
-                {layover}
-              </div>
-              <div key={index} className='separator' />
-            </>
+          <div className='separator separator-first' />
+          {layovers.map((layover) => (
+            <div key={layover} className='layover-wrapper'>
+              <div className='layover'>{layover}</div>
+              <div className='separator' />
+            </div>
           ))}
           <span className='layover-last'></span>
         </div>
